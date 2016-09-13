@@ -13,8 +13,8 @@ import datetime
 #Writen for Zabbix 2.4.8 with three parameters need: receiveremail,subject,content
 #mail_host = 'smtp.163.com'
 mail_host = '220.181.12.18'
-mail_user = 'telecomopenstack'
-mail_pass = 'Openstack2016'
+mail_user = 'telecomoPE'
+mail_pass = 'Opens016'
 mail_postfix = '163.com'
 
 def send_mail(mail_to,subject,content):
