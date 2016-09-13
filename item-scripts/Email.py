@@ -12,6 +12,7 @@ import datetime
 
 #Writen for Zabbix 2.4.8 with three parameters need: receiveremail,subject,content
 #mail_host = 'smtp.163.com'
+#the mail_user and password need to sign up 
 mail_host = '220.181.12.18'
 mail_user = 'telecomoPE'
 mail_pass = 'Opens016'
