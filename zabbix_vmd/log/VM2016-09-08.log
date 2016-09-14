@@ -1,0 +1,57 @@
+ERROR:root:2016-09-08 16:58:48.876391:
+------------------------------
+VM Daemon starts at Thu Sep  8 16:58:48 2016 with PID 111164.
+ERROR:root:2016-09-08 17:00:21.623330:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:00:21 2016 with PID 111291.
+ERROR:root:2016-09-08 17:01:01.194280:
+VM info Getting ERROR
+SyntaxError('invalid syntax', ('<string>', 1, 4, 'cat: /etc/zabbix/zabbix_vmd/tmp/new2.txt: No such file or directory'))
+ERROR:root:2016-09-08 17:01:21.216900:
+VM info Getting ERROR
+SyntaxError('invalid syntax', ('<string>', 1, 4, 'cat: /etc/zabbix/zabbix_vmd/tmp/new2.txt: No such file or directory'))
+ERROR:root:2016-09-08 17:01:41.222113:
+VM info Getting ERROR
+SyntaxError('invalid syntax', ('<string>', 1, 4, 'cat: /etc/zabbix/zabbix_vmd/tmp/new2.txt: No such file or directory'))
+ERROR:root:2016-09-08 17:02:01.245614:
+VM info Getting ERROR
+SyntaxError('invalid syntax', ('<string>', 1, 4, 'cat: /etc/zabbix/zabbix_vmd/tmp/new2.txt: No such file or directory'))
+ERROR:root:2016-09-08 17:43:13.999460:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:43:13 2016 with PID 114360.
+ERROR:root:2016-09-08 17:43:54.650671:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:43:54 2016 with PID 114439.
+ERROR:root:2016-09-08 17:45:00.621148:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:45:00 2016 with PID 114537.
+ERROR:root:2016-09-08 17:45:41.180203:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:45:41 2016 with PID 114603.
+ERROR:root:2016-09-08 17:45:53.549837:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:45:53 2016 with PID 114628.
+ERROR:root:2016-09-08 17:46:42.466968:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:46:42 2016 with PID 114703.
+ERROR:root:2016-09-08 17:47:40.288686:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:47:40 2016 with PID 114785.
+ERROR:root:2016-09-08 17:48:30.538386:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:48:30 2016 with PID 114876.
+ERROR:root:2016-09-08 17:49:59.450817:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:49:59 2016 with PID 115023.
+ERROR:root:2016-09-08 17:50:57.224020:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:50:57 2016 with PID 115130.
+ERROR:root:2016-09-08 17:58:11.924520:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 17:58:11 2016 with PID 115653.
+ERROR:root:2016-09-08 18:05:12.949675:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 18:05:12 2016 with PID 116215.
+ERROR:root:2016-09-08 18:05:36.023954:
+------------------------------------------------------------------
+VM Daemon starts at Thu Sep  8 18:05:36 2016 with PID 116262.
