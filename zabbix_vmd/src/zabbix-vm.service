@@ -1,0 +1,15 @@
+[Unit]
+Description=Zabbix Virtual Machine Monitoring Daemond
+After=network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/demodaemon.pid
+ExecStart=/root/deamon/deamon.py start
+ExecReload=/root/deamon/deamon.py restart
+ExecStop=/root/deamon/deamon.py stop
+KillSignal=SIGTERM
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
