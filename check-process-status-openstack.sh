@@ -31,7 +31,7 @@ fi
 ;;
 
 cinder)
-     process_status=$($1 service-list | awk -F '|' '{print $}' )
+     process_status=$($1 service-list | awk -F '|' '{print $3 $4 $6}'| grep down | awk '{print $2": "$1}' )
 if [[ $process_status = " " ]]; then 
 echo 0 
 else 
