@@ -1,0 +1,13 @@
+[zabbix]
+name=Zabbix Official Repository
+baseurl=http://10.0.192.12/repos/zabbix/zabbix
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+
+[zabbix-non-supported]
+name=Zabbix Official Repository non-supported 
+baseurl=http://10.0.192.12/repos/zabbix/zabbix-non-supported
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+gpgcheck=0

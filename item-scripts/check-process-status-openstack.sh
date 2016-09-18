@@ -1,4 +1,3 @@
-
 #!/bin/bash 
 #author by keanli
 export OS_PROJECT_DOMAIN_NAME=default
@@ -31,7 +30,11 @@ fi
 ;;
 
 cinder)
+<<<<<<< HEAD:check-process-status-openstack.sh
      process_status=$($1 service-list | awk -F '|' '{print $3 $4 $6}'| grep down | awk '{print $2": "$1}' )
+=======
+     process_status=$($1 service-list | awk -F '|' '{print $3 $4 $7}' | grep down | awk '{print $2": "$1}' )
+>>>>>>> 4f029b762811a8ade82edcf17003eeaa4f68e62d:item-scripts/check-process-status-openstack.sh
 if [[ $process_status = " " ]]; then 
 echo 0 
 else 

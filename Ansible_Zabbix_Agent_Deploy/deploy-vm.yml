@@ -1,0 +1,17 @@
+################  Function Introduction of the Playbook  ######################
+###:      Deploy the VM monitoring daemon related python files.
+###:      Written by Xiaoming Zheng initially on 13 Sep 2016
+################################################################################
+
+---
+- hosts: 192.168.0.112
+  remote_user: root
+  gather_facts: No
+  vars:
+  - test: 'test'
+
+  tasks:
+  - name: "Create folder for VM monitoring python files: /etc/zabbix/zabbix_vmd!"
+    copy: src={{ item.src }} dest={{ item.dest }} owner=zabbix group=zabbix mode=0755
+    with_items:
+    - {src: "/etc/zabbix/zabbix_vmd", dest: "/etc/zabbix/zabbix_vmd"}
