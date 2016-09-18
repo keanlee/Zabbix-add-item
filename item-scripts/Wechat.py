@@ -1,17 +1,16 @@
-
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import urllib,urllib2,json
 import argparse,logging
-import datetime
-import sys,os,pdb
+import datetime,pdb
+import sys,os
 reload(sys)
-sys.setdefaultencoding( "utf-8" )
+#sys.setdefaultencoding( "utf-8" )
 
 
 class WeChat(object):
-        """Modified on 15JUL2016 by Xiaoming Zheng for zabbix 2.4.8 where the subject and content are combined as the MSG\n First parameter is WechatID, the second one is subject as Email, the third/last one is MSG content!"""
+        """Modified by Xiaoming Zheng for zabbix 2.4.8 where the subject and content are combined as the MSG\n First parameter is WechatID, the second one is subject as Email, the third/last one is MSG content!"""
         __token_id = ''
         # init attribute
         def __init__(self,url):
@@ -21,21 +20,23 @@ class WeChat(object):
                 self.__toparty = '2'
                 self.__agentid = '1'
 
+
         # Get TokenID
         def authID(self):
                 params = {'corpid':self.__corpid, 'corpsecret':self.__secret}
                 data = urllib.urlencode(params)
                 content = self.getToken(data)
+
                 try:
                         self.__token_id = content['access_token']
+                        #print content['access_token']
                 except KeyError:
                         raise KeyError
-
         # Establish a connection
         def getToken(self,data,url_prefix='/'):
                 url = self.__url + url_prefix + 'gettoken?'
                 try:
-                        response = urllib2.Request(url + data,origin_req_host="qyapi.weixin.qq.com")
+                        response = urllib2.Request(url + data)
                 except KeyError:
                         raise KeyError
                 result = urllib2.urlopen(response)
@@ -43,7 +44,7 @@ class WeChat(object):
                 return content
 
         # Get sendmessage url
-def postData(self,data,url_prefix='/'):
+        def postData(self,data,url_prefix='/'):
                 url = self.__url + url_prefix + 'message/send?access_token=%s' % self.__token_id
                 request = urllib2.Request(url,data)
                 try:
@@ -61,7 +62,6 @@ def postData(self,data,url_prefix='/'):
 
         # send message
         def sendMessage(self,touser,message):
-
                 self.authID()
 
                 data = json.dumps({
@@ -102,7 +102,7 @@ if __name__ == '__main__':
         receiver=args.receiver
         content=args.subject+"\n\n"+args.content
         a = WeChat('https://qyapi.weixin.qq.com/cgi-bin')
-#       a = WeChat('https://117.185.30.190/cgi-bin')
+      #  pdb.set_trace()
         status=a.sendMessage(receiver,content)
         a.logwrite(status, receiver, content)
 
