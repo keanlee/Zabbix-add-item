@@ -29,7 +29,7 @@ def send_mail(mail_to,subject,content):
 
     try:
         smtp=smtplib.SMTP()
-        smtp.connect(mail_host)
+        smtp.connect(mail_host,465)
         smtp.login(mail_user,mail_pass)
         smtp.sendmail(me,mail_to,msg.as_string())
         smtp.close()
