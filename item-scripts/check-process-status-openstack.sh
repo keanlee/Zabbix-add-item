@@ -1,3 +1,6 @@
+
+
+
 #!/bin/bash 
 #author by keanli
 export OS_PROJECT_DOMAIN_NAME=default
@@ -38,3 +41,4 @@ else
 fi 
 ;;
 esac
+
