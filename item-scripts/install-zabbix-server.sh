@@ -68,8 +68,9 @@ echo "Import Zabbix Data Success"
 #show zabbix database talbes 
 echo $(mysql -uzabbix -pzabbix -e "use zabbix;show tables;")
 
-#configure the zabbix_server.conf,change the DBPassword=zabbix 
-sed -i '1 i DBPassword=zabbix' /etc/zabbix/zabbix_server.conf &&
+#configure the zabbix_server.conf,add the DBPassword=zabbix 
+sed -i '108 i DBPassword=zabbix' /etc/zabbix/zabbix_server.conf
+
 echo "/etc/zabbix/zabbix_server.conf edited finished "
 
 #configure the timezone of zabbix-web
