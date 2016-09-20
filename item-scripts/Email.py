@@ -13,10 +13,10 @@ import datetime
 #Writen for Zabbix 2.4.8 with three parameters need: receiveremail,subject,content
 #mail_host = 'smtp.163.com'
 #the mail_user and password need to sign up 
-mail_host = 'smtp.chinatelecom.cn'
-mail_user = 'lihao_1'
-mail_pass = 'Openstack123'
-mail_postfix = 'chinatelecom.cn'
+mail_host = '220.181.12.18'
+mail_user = 'telecomopenstack'
+mail_pass = 'Openstack2016'
+mail_postfix = '163.com'
 
 def send_mail(mail_to,subject,content):
     me = mail_user+"<"+mail_user+"@"+mail_postfix+">"
@@ -29,7 +29,7 @@ def send_mail(mail_to,subject,content):
 
     try:
         smtp=smtplib.SMTP()
-        smtp.connect(mail_host,465)
+        smtp.connect(mail_host)
         smtp.login(mail_user,mail_pass)
         smtp.sendmail(me,mail_to,msg.as_string())
         smtp.close()
