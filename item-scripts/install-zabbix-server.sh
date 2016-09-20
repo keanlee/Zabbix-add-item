@@ -6,7 +6,9 @@
 
 #Download the gnutls pacakage 
 
-#rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7.x86_64.rpm &&
+
+# Downgrade the pacakge of systemc, since the higher version cause can't start zabbix-server daemon 
+rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7.x86_64.rpm &&
 
 yum_zabbix_repo_install()
 {  
