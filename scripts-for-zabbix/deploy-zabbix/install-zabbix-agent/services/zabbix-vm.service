@@ -1,0 +1,18 @@
+[Unit]
+Description=Zabbix Virtual Machine Monitoring Daemond
+After=syslog.target network.target
+
+[Service]
+Type=forking
+Restart=on-failure
+PIDFile=/run/zabbix/zabbix_vmd.pid
+ExecStart=/etc/zabbix/zabbix_vmd/src/ZabbixVmD.py start
+ExecStop=/etc/zabbix/zabbix_vmd/src/ZabbixVmD.py stop
+#ExecStop=/bin/kill -SIGTERM $MAINPID
+ExecReload=/etc/zabbix/zabbix_vmd/src/ZabbixVmD.py restart
+#KillMode=control-group
+#PrivateTmp=true
+RestartSec=60s
+
+[Install]
+WantedBy=multi-user.target

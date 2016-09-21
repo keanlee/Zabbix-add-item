@@ -1,6 +1,5 @@
 #!/bin/bash
 #author by haoli on Sep.19, 2016
-
 #configure your system yum repo
 
 #Download the gnutls pacakage 
