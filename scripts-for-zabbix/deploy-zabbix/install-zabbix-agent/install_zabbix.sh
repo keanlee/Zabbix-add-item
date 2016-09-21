@@ -9,7 +9,7 @@
 # 7.in openstack computer nodes scp services/zabbix-vm.service /lib/systemd/system/
 # 8.config agent iptables iptables -A INPUT -p tcp -m tcp --dport 10050 -j ACCEPT
 
-ZABBIX_SERVER=10.0.192.62
+ZABBIX_SERVER=110.76.187.136
 
 usage()
 {
@@ -27,25 +27,10 @@ log_out()
     fi
 }
 
-yum_zabbix_repo_install()
-{
-
-      echo > zabbix.repo
-      cat > ./zabbix.repo << EOF
-[zabbix]
-name=Zabbix Official Repository - $basearch
-baseurl=http://110.76.187.3/repos/zabbix-2016-09-19/
-enabled=1
-gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
-EOF
-      mv ./zabbix.repo /etc/yum.repos.d/
-}
-
-yum_zabbix_repo_install
 
 zabbix_common()
 {
+### zabbix common operations, install packages, config common scripts, config iptables
    yum install zabbix-agent  zabbix-sender sysstat iptables-services -y
    log_out "$?" "yum install zabbix-agent  zabbix-sender sysstat iptables-services -y"
    mkdir -p /etc/zabbix/scripts 
@@ -61,11 +46,13 @@ zabbix_common()
 
 zabbix_openstack_config()
 {
-    sed -i "s/SERVER_IP/$ZABBIX_SERVER/g" template/zabbix_openstack_cnf.j2
-    sed -i "s/HOSTNAME/`hostname`/" template/zabbix_openstack_cnf.j2
-    sed -i "s/METADATA/$1/" template/zabbix_openstack_cnf.j2
+### config openstack zabbix agent; controller | computer
     cp template/zabbix_openstack_cnf.j2 /etc/zabbix/zabbix_agentd.conf
+    sed -i "s/SERVER_IP/$ZABBIX_SERVER/g" /etc/zabbix/zabbix_agentd.conf
+    sed -i "s/HOSTNAME/`hostname`/" /etc/zabbix/zabbix_agentd.conf
+    sed -i "s/METADATA/$1/" /etc/zabbix/zabbix_agentd.conf
     [ "$2" = "computer" ] && {
+    ### config vm monitor
         cp -r zabbix_vmd /etc/zabbix/
         chown zabbix.zabbix /etc/zabbix/zabbix_vmd
         cp services/zabbix-vm.service /lib/systemd/system/ 
@@ -79,11 +66,13 @@ zabbix_openstack_config()
 
 zabbix_ceph_config()
 {
-    sed -i "s/SERVER_IP/$ZABBIX_SERVER/g" template/zabbix_ceph_cnf.j2
-    sed -i "s/HOSTNAME/`hostname`/" template/zabbix_ceph_cnf.j2
-    sed -i "s/METADATA/$1/" template/zabbix_ceph_cnf.j2
+### config ceph zabbix agent; Ceph
     cp template/zabbix_ceph_cnf.j2 /etc/zabbix/zabbix_agentd.conf
+    sed -i "s/SERVER_IP/$ZABBIX_SERVER/g" /etc/zabbix/zabbix_agentd.conf
+    sed -i "s/HOSTNAME/`hostname`/" /etc/zabbix/zabbix_agentd.conf
+    sed -i "s/METADATA/$1/" /etc/zabbix/zabbix_agentd.conf
     [ "$2" = "mon" ] && {
+    #### config ceph monitor daemon
         cp services/zabbix-ceph.service /lib/systemd/system/
         systemctl enable zabbix-ceph
         systemctl start zabbix-ceph
