@@ -94,10 +94,12 @@ echo "----->The Selinux Status: $( getenforce)"
 
 #start zabbix-server daemon 
 systemctl start zabbix-server &&
-
+mkdir -p /etc/zabbix/scripts &&
+cp ./Email.py /etc/zabbix/scripts &&
+cp ./Wechat.py /etc/zabbix/scripts &&
+chown zabbix:zabbix /etc/zabbix/scripts &&
+echo "----->Email.py and Wechat.py has already copy to /etc/zabbix/scripts"
 echo "----->Zabbix Server Daemon Has Been Runing"
 echo "----->Please Go Ahead Zabbix frontend to finished install zabbix server"
-echo -n "----->PLEASE Login as Admin/zabbix in IP/zabbix by your Browser"
-
-
+echo "----->PLEASE Login as Admin/zabbix in IP/zabbix by your Browser"
 
