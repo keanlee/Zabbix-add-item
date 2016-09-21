@@ -27,6 +27,22 @@ log_out()
     fi
 }
 
+yum_zabbix_repo_install()
+{
+
+      echo > zabbix.repo
+      cat > ./zabbix.repo << EOF
+[zabbix]
+name=Zabbix Official Repository - $basearch
+baseurl=http://110.76.187.3/repos/zabbix-2016-09-19/
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+EOF
+      mv ./zabbix.repo /etc/yum.repos.d/
+}
+
+yum_zabbix_repo_install
 
 zabbix_common()
 {
