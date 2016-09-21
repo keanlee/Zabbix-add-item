@@ -22,7 +22,7 @@ EOF
       mv ./zabbix.repo /etc/yum.repos.d/
 }
 
-# rm -f /etc/yum.repos.d/*
+ rm -f /etc/yum.repos.d/*
 #  yum_base_repo_install
 #  yum_epel_repo_install 
   yum_zabbix_repo_install
@@ -99,6 +99,16 @@ cp ./Wechat.py /etc/zabbix/scripts &&
 chown -R zabbix:zabbix /etc/zabbix/scripts &&
 echo "----->Email.py and Wechat.py has already copy to /etc/zabbix/scripts"
 echo "----->Zabbix Server Daemon Has Been Runing"
+#configure the firewall 
+iptables -I  INPUT -p tcp --dport 22    -j ACCEPT
+iptables -P INPUT DROP
+iptables -A  INPUT -p tcp --dport 80    -j ACCEPT
+iptables -A  INPUT -p tcp --dport 10050 -j ACCEPT
+iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT
+
+
+
+
 echo "----->Please Go Ahead Zabbix frontend to finished install zabbix server"
 echo "----->PLEASE Login as Admin/zabbix in IP/zabbix by your Browser"
 
