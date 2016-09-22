@@ -49,8 +49,9 @@ EOF
     yum install -y zabbix-server zabbix-server-mysql  &&
     yum install -y zabbix-get
    
-
+    systemctl enable mariadb &&
     systemctl start mariadb && 
+    systemctl enable  httpd &&
     systemctl start httpd  &&
     
 echo -e " \033[1m --->All pacakge of zabbix has already installed, Begin to configure the mysql ...    "
@@ -79,6 +80,7 @@ sed -i '/\[Date\]/a\date.timezone = Asia/Shanghai' /etc/php.ini
 #sed -i 's/localhost/127.0.0.1/g' /etc/zabbix/web/zabbix.conf.php
 
 #start zabbix-agent daemon
+systemctl enable zabbix-agent &&
 systemctl start zabbix-agent &&
 echo "----->The zabbix-agent daemon is running "
 
@@ -92,6 +94,7 @@ setenforce 0  &&
 echo "----->The Selinux Status: $( getenforce)"
 
 #start zabbix-server daemon 
+systemctl enable zabbix-server &&
 systemctl start zabbix-server &&
 mkdir -p /etc/zabbix/scripts &&
 cp ./Email.py /etc/zabbix/scripts &&
