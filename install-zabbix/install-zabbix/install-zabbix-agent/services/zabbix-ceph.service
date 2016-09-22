@@ -1,0 +1,18 @@
+[Unit]
+Description=Zabbix Ceph Monitoring Daemond on One Ceph Monitor Note
+After=syslog.target network.target
+
+[Service]
+Type=forking
+Restart=on-failure
+PIDFile=/run/zabbix/zabbix_cephd.pid
+ExecStart=/etc/zabbix/scripts/ZabbixCephD.py start
+ExecStop=/etc/zabbix/scripts/ZabbixCephD.py stop
+#ExecStop=/bin/kill -SIGTERM $MAINPID
+ExecReload=/etc/zabbix/scripts/ZabbixCephD.py restart
+#KillMode=control-group
+#PrivateTmp=true
+RestartSec=60s
+
+[Install]
+WantedBy=multi-user.target

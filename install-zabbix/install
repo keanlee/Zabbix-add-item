@@ -1,0 +1,41 @@
+#! /bin/bash
+
+# 1.modify install-zabbix-agent/install-zabbix.sh ZABBIX_SERVER
+# 2.modify scripts/check-process-status-openstack.sh  password
+# 3.modify install-zabbix-agent/zabbix_vmd/cnf admin password
+
+
+fail_exit(){
+    if [[ $1 != 0 ]] ; then
+        exit 1
+    fi
+}
+
+report_exit(){
+    if [[ $1 != 0 ]] ; then
+        echo "faild"
+        exit 1
+    fi
+}
+
+cat zabbix-server |while read line ;do scp -r install-zabbix/install-zabbix-server $line:~/; report_exit $? ; done
+fail_exit $?
+cat ceph-mon |while read line ; do scp -r install-zabbix/install-zabbix-agent $line:~/ ; report_exit $? ;done
+fail_exit $?
+cat ceph-osd |while read line ; do scp -r install-zabbix/install-zabbix-agent $line:~/ ; report_exit $? ;done
+fail_exit $?
+cat openstack-controller |while read line ; do scp -r install-zabbix/install-zabbix-agent $line:~/ ; report_exit $? ;done
+fail_exit $?
+cat openstack-computer |while read line ; do scp -r install-zabbix/install-zabbix-agent $line:~/ ; report_exit $?;done
+fail_exit $?
+
+cat zabbix-server | while read line ; do ssh -n $line install-zabbix-server/install-zabbix-server.sh ; report_exit $? ;done
+fail_exit $?
+cat ceph-mon |while read line ;do ssh -n $line install-zabbix-agent/install_zabbix.sh ceph mon ceph ;report_exit $? ; done
+fail_exit $?
+cat ceph-osd |while read line ;do ssh -n $line install-zabbix-agent/install_zabbix.sh ceph osd ceph ;report_exit $? ; done
+fail_exit $?
+cat openstack-controller  |while read line ;do ssh -n $line install-zabbix-agent/install_zabbix.sh openstack controller ; report_exit $?;done
+fail_exit $?
+cat openstack-computer  |while read line ;do ssh -n $line install-zabbix-agent/install_zabbix.sh openstack computer;report_exit $?;done
+fail_exit $?
