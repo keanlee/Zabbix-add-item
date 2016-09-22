@@ -68,9 +68,11 @@ echo "----->Import Zabbix Data Success"
 #echo $(mysql -uzabbix -pzabbix -e "use zabbix;show tables;")
 
 #configure the zabbix_server.conf,add the DBPassword=zabbix 
-sed -i '108 i DBPassword=zabbix' /etc/zabbix/zabbix_server.conf
+sed -i '108 i DBPassword=zabbix' /etc/zabbix/zabbix_server.conf &&
 
 echo "----->/etc/zabbix/zabbix_server.conf edited finished "
+#edit the alertpath 
+sed -i 's/AlertScriptsPath=\/usr\/lib\/zabbix\/alertscripts/AlertScriptsPath=\/etc\/zabbix\/scripts/' /etc/zabbix/zabbix_server.conf
 
 #configure the timezone of zabbix-web
 sed -i '/\[Date\]/a\date.timezone = Asia/Shanghai' /etc/php.ini 
