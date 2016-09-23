@@ -24,7 +24,7 @@ EOF
       mv ./zabbix.repo /etc/yum.repos.d/
 }
 
-# rm -f /etc/yum.repos.d/*
+rm -f /etc/yum.repos.d/*
 #  yum_base_repo_install
 #  yum_epel_repo_install 
   yum_zabbix_repo_install
