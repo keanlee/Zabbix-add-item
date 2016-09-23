@@ -116,6 +116,38 @@ iptables -I  INPUT -p tcp --dport 10051 -j ACCEPT
 iptables-save > /etc/sysconfig/iptables
 systemctl enable iptables
 systemctl start iptables
+#add base yu, repos
+yum_base_repo_install()
+{
+        echo > CentOS-Base.repo
+        cat > ./CentOS-Base.repo <<EOF
+[base]
+name=CentOS-7 - Base
+baseurl=http://110.76.187.103/repos/centos/base
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+#released updates 
+[updates]
+name=CentOS-7 - Updates
+baseurl=http://110.76.187.103/repos/centos/updates
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+#additional packages that may be useful
+[extras]
+name=CentOS-7 - Extras
+baseurl=http://110.76.187.103/repos/centos/extras
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+EOF
+        mv CentOS-Base.repo /etc/yum.repos.d/
+} 
+yum_base_repo_install  &&
+echo "---->yum base repos added"
+
+
+
 
 echo "----->Finshed the firewall,open port:22,80,10050,10051"
 echo "----->Please Go Ahead Zabbix frontend to finished install zabbix server"
