@@ -14,8 +14,8 @@ import datetime
 #mail_host = 'smtp.163.com'
 #the mail_user and password need to sign up 
 mail_host = '220.181.12.18'
-mail_user = 'telecomopenstack'
-mail_pass = 'Openstack2016'
+mail_user = 'tmopenstack'
+mail_pass = 'Opck2016'
 mail_postfix = '163.com'
 
 def send_mail(mail_to,subject,content):
