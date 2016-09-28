@@ -123,21 +123,27 @@ yum_base_repo_install()
         cat > ./CentOS-Base.repo <<EOF
 [base]
 name=CentOS-7 - Base
-baseurl=http://110.76.187.103/repos/centos/base
+baseurl=http://110.76.187.3/repos/centos/base
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 
 #released updates 
 [updates]
 name=CentOS-7 - Updates
-baseurl=http://110.76.187.103/repos/centos/updates
+baseurl=http://110.76.187.3/repos/centos/updates
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+[epel]
+name=CentOS-7 - epel
+baseurl=http://110.76.187.3/repos/epel/
+gpgcheck=0
+
 
 #additional packages that may be useful
 [extras]
 name=CentOS-7 - Extras
-baseurl=http://110.76.187.103/repos/centos/extras
+baseurl=http://110.76.187.3/repos/centos/extras
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 EOF
