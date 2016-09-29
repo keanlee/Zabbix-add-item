@@ -13,7 +13,7 @@ case $1 in
 
 nova)
      process_status=$($1 service-list  | awk -F '|' '{print  $3 $4 $7}' | grep down | awk '{print $2": "$1}')
-if [[ $process_status = " " ]]; then
+if [[ $process_status = "" ]]; then
 echo 1
 else
 echo $process_status
@@ -21,7 +21,7 @@ fi
 ;;
 
 neutron)
-     process_status=$($1 agent-list | awk -F '|' '{print $4 $7 $5 }' | grep xxx | awk '{print $1 ": "$2 }')
+     process_status=$($1 agent-list | awk -F '|' '{print $4 $6 $8 }' | grep xxx | awk '{print $1 ": "$3 }')
 if [[ $process_status = "" ]]; then
 echo 1
 else
