@@ -17,6 +17,7 @@ rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el
        yum install zabbix-server-mysql -y 
        yum install zabbix-web-mysql -y
        yum install mariadb-server -y
+       yum install zabbix-agent -y  &&
        yum install zabbix-get -y &&
 
 #start mariadb daemon
@@ -67,9 +68,9 @@ echo "----->Finshed the firewall,open port:22,80,10050,10051"
     systemctl start httpd  &&
 echo "----->The httpd daemon is running "
 #start zabbix-agent daemon
-#    systemctl enable zabbix-agent 1>/dev/null 2>&1
-#   systemctl start zabbix-agent &&
-#  echo "----->The zabbix-agent daemon is running "
+     systemctl enable zabbix-agent 1>/dev/null 2>&1
+     systemctl start zabbix-agent &&
+     echo "----->The zabbix-agent daemon is running "
 
 #start zabbix-server daemon 
 systemctl enable zabbix-server 1>/dev/null 2>&1
