@@ -19,7 +19,7 @@ rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el
        yum install mariadb-server -y
        yum install zabbix-get -y &&
 
-## yum install httpd && 
+#start mariadb daemon
 
 systemctl enable mariadb
 systemctl start mariadb 
