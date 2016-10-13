@@ -67,9 +67,9 @@ echo "----->Finshed the firewall,open port:22,80,10050,10051"
     systemctl start httpd  &&
 echo "----->The httpd daemon is running "
 #start zabbix-agent daemon
-    systemctl enable zabbix-agent 1>/dev/null 2>&1
-    systemctl start zabbix-agent &&
-echo "----->The zabbix-agent daemon is running "
+#    systemctl enable zabbix-agent 1>/dev/null 2>&1
+#   systemctl start zabbix-agent &&
+#  echo "----->The zabbix-agent daemon is running "
 
 #start zabbix-server daemon 
 systemctl enable zabbix-server 1>/dev/null 2>&1
