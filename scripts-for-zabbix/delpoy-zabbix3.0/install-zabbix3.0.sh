@@ -21,14 +21,14 @@ rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el
 
 #start mariadb daemon
 
-systemctl enable mariadb
+systemctl enable mariadb  1>/dev/null 2>&1
 systemctl start mariadb 
 
 mysqladmin -uroot password admin && 
 #crate zabbix user of mysql 
 mysql -uroot -padmin -e "create database zabbix character set utf8;grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';flush privileges;" &&
 echo -e " \033[1m --->All pacakge of zabbix has already installed, Begin to configure the mysql ...    "
-  >/dev/null 2>&1
+
 #import database to mysql 
 zcat   /usr/share/doc/zabbix-server-mysql-3.0.5/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  && 
 echo "----->Import Zabbix Data Success"
