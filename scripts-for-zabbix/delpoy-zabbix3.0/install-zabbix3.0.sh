@@ -63,16 +63,16 @@ iptables -A  INPUT -p tcp --dport 10050 -j ACCEPT
 iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT &&
 echo "----->Finshed the firewall,open port:22,80,10050,10051"
 
-    systemctl enable  httpd &
+    systemctl enable  httpd >/dev/null 2>&1
     systemctl start httpd  &&
 echo "----->The httpd daemon is running "
 #start zabbix-agent daemon
-    systemctl enable zabbix-agent &
+    systemctl enable zabbix-agent >/dev/null 2>&1
     systemctl start zabbix-agent &&
 echo "----->The zabbix-agent daemon is running "
 
 #start zabbix-server daemon 
-systemctl enable zabbix-server & &&
+systemctl enable zabbix-server >/dev/null 2>&1
 systemctl start zabbix-server &&
 
 echo "----->Zabbix Server Daemon Has Been Runing" && 
