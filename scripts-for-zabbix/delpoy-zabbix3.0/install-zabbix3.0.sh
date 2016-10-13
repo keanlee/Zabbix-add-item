@@ -28,7 +28,7 @@ mysqladmin -uroot password admin &&
 #crate zabbix user of mysql 
 mysql -uroot -padmin -e "create database zabbix character set utf8;grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';flush privileges;" &&
 echo -e " \033[1m --->All pacakge of zabbix has already installed, Begin to configure the mysql ...    "
-  >>/dev/null
+  >/dev/null 2>&1
 #import database to mysql 
 zcat   /usr/share/doc/zabbix-server-mysql-3.0.5/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  && 
 echo "----->Import Zabbix Data Success"
@@ -63,16 +63,16 @@ iptables -A  INPUT -p tcp --dport 10050 -j ACCEPT
 iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT &&
 echo "----->Finshed the firewall,open port:22,80,10050,10051"
 
-    systemctl enable  httpd >/dev/null 2>&1
+    systemctl enable  httpd 1>/dev/null 
     systemctl start httpd  &&
 echo "----->The httpd daemon is running "
 #start zabbix-agent daemon
-    systemctl enable zabbix-agent >/dev/null 2>&1
+    systemctl enable zabbix-agent 1>/dev/null
     systemctl start zabbix-agent &&
 echo "----->The zabbix-agent daemon is running "
 
 #start zabbix-server daemon 
-systemctl enable zabbix-server >/dev/null 2>&1
+systemctl enable zabbix-server 1>/dev/null
 systemctl start zabbix-server &&
 
 echo "----->Zabbix Server Daemon Has Been Runing" && 
