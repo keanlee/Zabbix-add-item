@@ -8,10 +8,10 @@ rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el
 
 #clean install env 
 
-       yum erase -y zabbix-server-mysql >/dev/null 2>&1
-       yum erase -y zabbix-web-mysql >/dev/null 2>&1
-       yum erase -y mariadb-server >/dev/null 2>&1
-       yum erase -y zabbix-get  >/dev/null 2>&1
+       yum erase -y zabbix-server-mysql 1>/dev/null 2>&1
+       yum erase -y zabbix-web-mysql 1>/dev/null 2>&1
+       yum erase -y mariadb-server 1>/dev/null 2>&1
+       yum erase -y zabbix-get  1>/dev/null 2>&1
 #install zabbix 3.0 
 
        yum install zabbix-server-mysql -y 
@@ -63,16 +63,16 @@ iptables -A  INPUT -p tcp --dport 10050 -j ACCEPT
 iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT &&
 echo "----->Finshed the firewall,open port:22,80,10050,10051"
 
-    systemctl enable  httpd 1>/dev/null 
+    systemctl enable  httpd 1>/dev/null 2>&1
     systemctl start httpd  &&
 echo "----->The httpd daemon is running "
 #start zabbix-agent daemon
-    systemctl enable zabbix-agent 1>/dev/null
+    systemctl enable zabbix-agent 1>/dev/null 2>&1
     systemctl start zabbix-agent &&
 echo "----->The zabbix-agent daemon is running "
 
 #start zabbix-server daemon 
-systemctl enable zabbix-server 1>/dev/null
+systemctl enable zabbix-server 1>/dev/null 2>&1
 systemctl start zabbix-server &&
 
 echo "----->Zabbix Server Daemon Has Been Runing" && 
