@@ -53,6 +53,8 @@ sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config #disable sel
 setenforce 0  &&
 echo "----->The Selinux Status: $( getenforce)"
 
+#start firewalld
+systemctl start firewalld
 #configure the firewall 
 iptables -I  INPUT -p tcp --dport 22    -j ACCEPT
 iptables -P INPUT DROP
@@ -64,9 +66,6 @@ echo "----->Finshed the firewall,open port:22,80,10050,10051"
     systemctl enable  httpd &&
     systemctl start httpd  &&
 echo "----->The httpd daemon is running "
-#stop firewalld
-systemctl stop firewalld
-
 #start zabbix-agent daemon
     systemctl enable zabbix-agent &&
     systemctl start zabbix-agent &&
