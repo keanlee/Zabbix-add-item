@@ -8,10 +8,10 @@ rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el
 
 #clean install env 
 
-       yum erase -y zabbix-server-mysql &  &&
-       yum erase -y zabbix-web-mysql & && 
-       yum erase -y mariadb-server & &&
-       yum erase -y zabbix-get &  &&
+       yum erase -y zabbix-server-mysql >/dev/null 2>&1
+       yum erase -y zabbix-web-mysql >/dev/null 2>&1
+       yum erase -y mariadb-server >/dev/null 2>&1
+       yum erase -y zabbix-get &  >/dev/null 2>&1
 #install zabbix 3.0 
 
        yum install zabbix-server-mysql -y 
