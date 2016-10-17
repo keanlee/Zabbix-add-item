@@ -44,6 +44,7 @@ sed -i 's/AlertScriptsPath=\/usr\/lib\/zabbix\/alertscripts/AlertScriptsPath=\/e
 mkdir -p /etc/zabbix/scripts &&
 cp ./Email.py /etc/zabbix/scripts &&
 cp ./Wechat.py /etc/zabbix/scripts &&
+cp ./get-zabbix-database-size.sh /etc/zabbix/scripts &&
 chown -R zabbix:zabbix /etc/zabbix/scripts &&
 echo "----->Email.py and Wechat.py has already copy to /etc/zabbix/scripts"
 #configure the timezone of zabbix-web
