@@ -1,10 +1,10 @@
 #!/bin/sh
 #author by haoli on 13th Oct
-echo "Begin install zabbix server 3.0 ..."
+echo -e " \033[1m Begin install zabbix server 3.0 ..."
 # Downgrade the pacakge of systemc, since the higher version cause can't start zabbix-server daemon 
-rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7.x86_64.rpm 1>/dev/null 2&1 &&
+rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7.x86_64.rpm   1>/dev/null 2>&1 &&
 
-rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  &&
+rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1 &&
 echo "setup zabbix repos successfull"
 
 #clean install env 
