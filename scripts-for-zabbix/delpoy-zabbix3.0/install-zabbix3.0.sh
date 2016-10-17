@@ -7,22 +7,22 @@ rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7
 rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm
 
 #clean install env 
-
+#set -x
        yum erase -y zabbix-server-mysql 1>/dev/null 2>&1
        yum erase -y zabbix-web-mysql 1>/dev/null 2>&1
        yum erase -y mariadb-server 1>/dev/null 2>&1
        yum erase -y zabbix-get  1>/dev/null 2>&1
 #install zabbix 3.0 
 
-       yum install zabbix-server-mysql -y 1>/dev/null &&
+       yum install zabbix-server-mysql -y 1>/dev/null 2>&1 &&
 echo "zabbix-server-mysql installed " 
-       yum install zabbix-web-mysql -y  1>/dev/null &&
+       yum install zabbix-web-mysql -y  1>/dev/null 2>&1  &&
 echo "zabbix-web-mysql installed "
-       yum install mariadb-server -y  1>/dev/null &&
+       yum install mariadb-server -y  1>/dev/null 2>&1  &&
 echo "mariadb-server installed "
-       yum install zabbix-agent -y   1>/dev/null &&
+       yum install zabbix-agent -y   1>/dev/null 2>&1 &&
 echo "zabbix-agent installed "
-       yum install zabbix-get -y 1>/dev/null &&
+       yum install zabbix-get -y 1>/dev/null 2>&1 &&
 echo "zabbix-get installed "
 
 #start mariadb daemon
@@ -33,7 +33,7 @@ systemctl start mariadb
 mysqladmin -uroot password admin && 
 #crate zabbix user of mysql 
 mysql -uroot -padmin -e "create database zabbix character set utf8;grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';flush privileges;" &&
-echo -e " \033[1m --->All pacakge of zabbix has already installed, Begin to configure the mysql ...    "
+echo -e " \033[1m --->All pacakge of zabbix has already installed, Begin to import data to zabbix database ...    "
 
 #import database to mysql 
 zcat   /usr/share/doc/zabbix-server-mysql-3.0.5/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  && 
