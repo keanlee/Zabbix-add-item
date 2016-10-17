@@ -14,11 +14,16 @@ rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el
        yum erase -y zabbix-get  1>/dev/null 2>&1
 #install zabbix 3.0 
 
-       yum install zabbix-server-mysql -y 
-       yum install zabbix-web-mysql -y
-       yum install mariadb-server -y
-       yum install zabbix-agent -y  &&
-       yum install zabbix-get -y &&
+       yum install zabbix-server-mysql -y 1>/dev/null &&
+echo "zabbix-server-mysql installed " 
+       yum install zabbix-web-mysql -y  1>/dev/null &&
+echo "zabbix-web-mysql installed "
+       yum install mariadb-server -y  1>/dev/null &&
+echo "mariadb-server installed "
+       yum install zabbix-agent -y   1>/dev/null &&
+echo "zabbix-agent installed "
+       yum install zabbix-get -y 1>/dev/null &&
+echo "zabbix-get installed "
 
 #start mariadb daemon
 
