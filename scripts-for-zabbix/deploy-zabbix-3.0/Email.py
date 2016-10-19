@@ -1,5 +1,3 @@
-
-
 #!/usr/bin/python
 #coding:utf-8
 
@@ -15,8 +13,8 @@ import datetime
 #the mail_user and password need to sign up 
 mail_host = 'smtp.chinatelecom.cn'
 mail_host_port = 465
-mail_user = 'lihao_1'
-mail_pass = 'Openstack123'
+mail_user = 'lo_1'
+mail_pass = 'Opck123'
 mail_postfix = 'chinatelecom.cn'
 
 def send_mail(mail_to,subject,content):
