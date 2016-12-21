@@ -110,5 +110,5 @@ echo "----->Zabbix Server Daemon Has Been Runing" &&
 echo "----->Finshed the firewall,open port:22,80,10050,10051"
 echo "----->Please Go Ahead Zabbix frontend to finished install zabbix server"
 echo "----->PLEASE Login as Admin/zabbix in IP/zabbix by your Browser" 
-systemctl start firewalld
-systemctl stop firewalld
+#systemctl start firewalld
+#systemctl stop firewalld
