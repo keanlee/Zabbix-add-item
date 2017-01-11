@@ -60,7 +60,7 @@ mysql -uroot -padmin -e "create database zabbix character set utf8;grant all pri
 echo -e " \033[1m --->All pacakge of zabbix has already installed, Begin to import data to zabbix database ...    "
 
 #import database to mysql 
-zcat   /usr/share/doc/zabbix-server-mysql-3.0.5/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  && 
+zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  && 
 echo "----->Import Zabbix Data Success"
 #configure the zabbix_server.conf,add the DBPassword=zabbix
 sed -i '108 i DBPassword=zabbix' /etc/zabbix/zabbix_server.conf &&
