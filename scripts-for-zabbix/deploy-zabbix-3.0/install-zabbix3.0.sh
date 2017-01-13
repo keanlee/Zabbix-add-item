@@ -13,14 +13,14 @@ yum_zabbix_repo_install()
       cat > ./zabbix.repo << EOF
 [zabbix]
 name=Zabbix Official Repository - $basearch
-baseurl=http://42.123.126.173:8089/repos/zabbix/
+baseurl=http://110.76.187.145/repos/zabbix/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 [zabbix-non-supported]
 name=Zabbix Official Repository - $basearch
-baseurl=http://42.123.126.173:8089/repos/zabbix-non-supported/
+baseurl=http://110.76.187.145/repos/zabbix-non-supported/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
