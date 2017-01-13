@@ -1,6 +1,6 @@
 var Zabbix = require ('../lib/zabbix');
 
-var zabbix = new Zabbix('http://110.76.187.69/zabbix/api_jsonrpc.php','Admin', 'zabbix');
+var zabbix = new Zabbix('http://110.76.187.9/zabbix/api_jsonrpc.php','JKZabbix', '2LkGwW/j4uo=');
 
 zabbix.getApiVersion(function (err, res, body) {
   if (!err) {
@@ -26,10 +26,10 @@ zabbix.login(function (err, resp, body) {
         "eventsource": 0,
         "status": 0,
         "esc_period": 120,
-        "def_shortdata": "Small-Cluster: {HOST.IP}  {EVENT.TIME} {TRIGGER.STATUS}: {TRIGGER.NAME}",
+        "def_shortdata": "Big-Cluster: {HOST.IP}  {EVENT.TIME} {TRIGGER.STATUS}: {TRIGGER.NAME}",
         "def_longdata": "Trigger: {TRIGGER.NAME}\r\nTrigger status: {TRIGGER.STATUS}\r\nTrigger severity: {TRIGGER.SEVERITY}\r\n\r\nItem values:\r\n\r\n{ITEM.NAME1} ({HOST.NAME1}:{ITEM.KEY1}): {ITEM.VALUE1}\r\n\r\nOriginal event ID: {EVENT.ID}",
         "recovery_msg": 1,
-        "r_shortdata": "Small-Cluster: {HOST.IP}  {TRIGGER.STATUS}: {TRIGGER.NAME}" ,
+        "r_shortdata": "Big-Cluster: {HOST.IP}  {TRIGGER.STATUS}: {TRIGGER.NAME}" ,
         "r_longdata": "Trigger: {TRIGGER.NAME}\r\nTrigger status: {TRIGGER.STATUS}\r\nTrigger severity: {TRIGGER.SEVERITY}\r\n\r\nItem values:\r\n\r\n{ITEM.NAME1} ({HOST.NAME1}:{ITEM.KEY1}): {ITEM.VALUE1}\r\n\r\nOriginal event ID: {EVENT.ID}",
         "filter": {
             "evaltype": 0,
@@ -102,9 +102,4 @@ zabbix.login(function (err, resp, body) {
       }
     });
 });
-
-
-
-
-
 

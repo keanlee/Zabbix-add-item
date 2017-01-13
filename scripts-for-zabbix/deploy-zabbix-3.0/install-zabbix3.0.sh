@@ -1,5 +1,6 @@
 #!/bin/sh
 #author by haoli on 13th Oct
+echo "Please be attention, this script can be work well for CentOS Linux release 7.1.1503 (Core)"
 echo -e " \033[1m Begin install zabbix server 3.0 ..."
 # Downgrade the pacakge of systemc, since the higher version cause can't start zabbix-server daemon 
 rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7.x86_64.rpm   1>/dev/null 2>&1 &&
@@ -12,14 +13,14 @@ yum_zabbix_repo_install()
       cat > ./zabbix.repo << EOF
 [zabbix]
 name=Zabbix Official Repository - $basearch
-baseurl=http://110.76.187.40/repos/zabbix/
+baseurl=http://42.123.126.173:8089/repos/zabbix/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 [zabbix-non-supported]
 name=Zabbix Official Repository - $basearch
-baseurl=http://110.76.187.40/repos/zabbix-non-supported/
+baseurl=http://42.123.126.173:8089/repos/zabbix-non-supported/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
@@ -52,7 +53,7 @@ echo "zabbix-get installed "
 #start mariadb daemon
 
 systemctl enable mariadb  1>/dev/null 2>&1
-systemctl start mariadb 
+systemctl start mariadb   && 
 
 mysqladmin -uroot password admin && 
 #crate zabbix user of mysql 
