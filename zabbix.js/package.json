@@ -1,0 +1,34 @@
+{
+  "author": "PAWM International <pawmint@googlegroups.com>",
+  "name": "zabbix",
+  "description": "A minimal wrapper around request.js to facilitate fetching data from the Zabbix API.",
+  "version": "0.1.1",
+  "main": "./lib/zabbix",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -w -R spec"
+  },
+  "keywords": [
+    "zabbix",
+    "zabbixapi",
+    "jsonrpc2"
+  ],
+  "homepage": "http://github.com/pawmint/zabbix.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pawmint/zabbix.js.git"
+  },
+  "dependencies": {
+    "async": "^1.4.2",
+    "request": "~2.9.203"
+  },
+  "devDependencies": {
+    "mocha": "~1.3.0",
+    "mockery": "^1.4.0",
+    "should": "~1.0.0",
+    "sinon": "^1.10.3"
+  },
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
