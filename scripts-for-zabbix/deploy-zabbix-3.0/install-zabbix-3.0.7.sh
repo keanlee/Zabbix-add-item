@@ -19,28 +19,28 @@ gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 [extras]
-name=Zabbix Official Repository - $basearch
+name=Yum extras
 baseurl=http://110.76.187.145/repos/extras/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 [update]
-name=Zabbix Official Repository - $basearch
+name=Yum update
 baseurl=http://110.76.187.145/repos/updates/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 [zabbix]
-name=Zabbix Official Repository - $basearch
+name=Zabbix Official Repository - zabbix
 baseurl=http://110.76.187.145/repos/zabbix/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 [zabbix-non-supported]
-name=Zabbix Official Repository - $basearch
+name=Zabbix Official Repository - non-supported
 baseurl=http://110.76.187.145/repos/zabbix-non-supported/
 enabled=1
 gpgcheck=0
