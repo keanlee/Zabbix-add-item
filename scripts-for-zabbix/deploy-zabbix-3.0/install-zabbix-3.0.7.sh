@@ -1,5 +1,8 @@
 #!/bin/sh
 #author by haoli on 13th Oct
+
+function install(){
+
 echo -e " \033[1m Begin install zabbix server 3.0 ..."
 # Downgrade the pacakge of systemc, since the higher version cause can't start zabbix-server daemon 
 rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7.x86_64.rpm   1>/dev/null 2>&1 &&
@@ -133,3 +136,18 @@ echo "----->Zabbix Server Daemon Has Been Runing" &&
 echo "----->Finshed the firewall,open port:22,80,10050,10051"
 echo "----->Please Go Ahead Zabbix frontend to finished install zabbix server"
 echo "----->PLEASE Login as Admin/zabbix in IP/zabbix by your Browser" 
+}
+
+function choice(){
+          case $1 in
+          yes)
+           install
+          ;;
+          no)
+          echo "Please use CentOS 7.1 to complete zabbix server install "
+          exit 0
+          esac
+ }
+
+read -p "Pls notice this script is just for CentOS 7.1 , your OS is $(cat /etc/redhat-release), is that correct ? yes of no " num
+choice $num
