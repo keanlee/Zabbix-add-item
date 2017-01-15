@@ -1,5 +1,5 @@
 #!/bin/sh
-#author by haoli on 13th Oct
+#author by haoli on 13th Oct of 2016
 
 function install(){
 
