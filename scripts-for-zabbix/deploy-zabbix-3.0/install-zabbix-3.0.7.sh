@@ -83,7 +83,7 @@ systemctl start mariadb
 mysqladmin -uroot password admin && 
 #crate zabbix user of mysql 
 mysql -uroot -padmin -e "create database zabbix character set utf8;grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';flush privileges;" &&
-echo -e " \033[1m --->All pacakge of zabbix has already installed, Begin to import data to zabbix database ...    "
+echo -e " \033[1m --->All pacakge of zabbix has been installed, Begin to import data to zabbix database ...    "
 
 #import database to mysql 
 zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  && 
