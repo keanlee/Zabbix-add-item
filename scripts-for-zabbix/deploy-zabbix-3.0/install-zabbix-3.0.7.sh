@@ -101,7 +101,7 @@ cp ./Email.py /etc/zabbix/scripts &&
 cp ./Wechat.py /etc/zabbix/scripts &&
 cp ./get-zabbix-database-size.sh /etc/zabbix/scripts &&
 chown -R zabbix:zabbix /etc/zabbix/scripts &&
-echo "----->Email.py and Wechat.py has already copy to /etc/zabbix/scripts"
+echo "----->Email.py and Wechat.py has been copy to /etc/zabbix/scripts"
 #configure the timezone of zabbix-web
 sed -i '19 i php_value date.timezone Asia/Shanghai ' /etc/httpd/conf.d/zabbix.conf && 
 
