@@ -144,7 +144,7 @@ function choice(){
            install
           ;;
           no)
-          echo -e "\33[5m Please use CentOS 7.1 to complete zabbix server install  ”  
+          echo -e " \33[5m Please use CentOS 7.1 to complete zabbix server install  ”  
           exit 0
           esac
  }
