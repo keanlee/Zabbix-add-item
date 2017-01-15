@@ -149,5 +149,5 @@ function choice(){
           esac
  }
 
-read -p "Pls notice this script is just for CentOS 7.1 , your OS is $(cat /etc/redhat-release), is that correct ? yes or no: " num
+read -p " Pls notice this script is just for CentOS 7.1, your OS is $(cat /etc/redhat-release). Is that correct? yes or no: " num
 choice $num
