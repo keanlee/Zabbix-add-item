@@ -144,10 +144,9 @@ function choice(){
            install
           ;;
           no)
-          echo "Please use CentOS 7.1 to complete zabbix server install”  
+          echo " Please use CentOS 7.1 to complete zabbix server install " 
           exit 0
           esac
- }
-
+}
 read -p  "Pls notice this script is just for CentOS 7.1, your OS is $(cat /etc/redhat-release). Is that correct? yes or no: " num
 choice $num
