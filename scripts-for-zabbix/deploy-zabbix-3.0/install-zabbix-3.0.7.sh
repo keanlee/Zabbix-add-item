@@ -16,35 +16,35 @@ yum_zabbix_repo_install()
 
 [base]
 name=Yum base 
-baseurl=http://110.76.187.145/repos/base/
+baseurl=http://110.76.187.3/newton/base/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 [extras]
 name=Yum extras
-baseurl=http://110.76.187.145/repos/extras/
+baseurl=http://110.76.187.3/newton/extras/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 [update]
 name=Yum update
-baseurl=http://110.76.187.145/repos/updates/
+baseurl=http://110.76.187.3/newton/updates/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 [zabbix]
 name=Zabbix Official Repository - zabbix
-baseurl=http://110.76.187.145/repos/zabbix/
+baseurl=http://110.76.187.3/newton/zabbix/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 [zabbix-non-supported]
 name=Zabbix Official Repository - non-supported
-baseurl=http://110.76.187.145/repos/zabbix-non-supported/
+baseurl=http://110.76.187.3/newton/zabbix-non-supported/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
