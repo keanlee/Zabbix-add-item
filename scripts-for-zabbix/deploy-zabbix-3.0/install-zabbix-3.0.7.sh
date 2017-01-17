@@ -1,12 +1,10 @@
 #!/bin/sh
 #author by haoli on 13th Oct of 2016
-
+echo "Hi, Thank for you use this script to deploy zabbix-server, this scrip can be help you deploy zabbix3.0 on 
+CentOS7.1/7.2/7.3 . So please choose your OS "
 function install(){
-
 echo -e " \033[1m Begin install zabbix server 3.0 ..."
-# Downgrade the pacakge of systemc, since the higher version cause can't start zabbix-server daemon 
-
-#rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1 &&
+ #rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1 &&
 yum_zabbix_repo_install()
 {  
 
@@ -140,6 +138,7 @@ echo "----->PLEASE Login as Admin/zabbix in IP/zabbix by your Browser"
 function choice(){
           case $1 in
           yes)
+          # Downgrade the pacakge of systemc, since the higher version cause can't start zabbix-server daemon
           rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7.x86_64.rpm   1>/dev/null 2>&1 &&
           install
           ;;
