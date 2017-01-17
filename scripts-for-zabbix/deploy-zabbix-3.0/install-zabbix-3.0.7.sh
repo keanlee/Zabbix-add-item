@@ -143,6 +143,7 @@ function choice(){
           install
           ;;
           no)
+          echo "This script will be deploy zabbix-server on $(cat /etc/redhat-release)"
           install 
           exit 0
           esac
