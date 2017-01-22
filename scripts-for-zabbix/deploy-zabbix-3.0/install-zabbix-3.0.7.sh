@@ -110,12 +110,7 @@ echo "----->The Selinux Status: $( getenforce)"
 #start firewalld
 #systemctl start firewalld
 #configure the firewall 
-iptables -I  INPUT -p tcp --dport 22    -j ACCEPT
-iptables -P INPUT DROP
-iptables -A  INPUT -p tcp --dport 80    -j ACCEPT
-iptables -A  INPUT -p tcp --dport 10050 -j ACCEPT
-iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT &&
-echo "----->Finshed the firewall,open port:22,80,10050,10051"
+
 
     systemctl enable  httpd 1>/dev/null 2>&1
     systemctl start httpd  &&
@@ -133,6 +128,23 @@ echo "----->Zabbix Server Daemon Has Been Runing" &&
 echo "----->Finshed the firewall,open port:22,80,10050,10051"
 echo "----->Please Go Ahead Zabbix frontend to finished install zabbix server"
 echo "----->PLEASE Login as Admin/zabbix in IP/zabbix by your Browser" 
+function iptable(){
+           case $1 in
+           yes)
+iptables -I  INPUT -p tcp --dport 22    -j ACCEPT
+iptables -P INPUT DROP
+iptables -A  INPUT -p tcp --dport 80    -j ACCEPT
+iptables -A  INPUT -p tcp --dport 10050 -j ACCEPT
+iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT &&
+echo "----->Finshed the firewall,open port:22,80,10050,10051"
+             ;;
+             no)
+             echo "No iptable ruler "
+             exit 0
+             esac
+}
+read -p "Do you need configer the firewall ruler (yes/no)?: " num
+iptable $num
 }
 
 function choice(){
