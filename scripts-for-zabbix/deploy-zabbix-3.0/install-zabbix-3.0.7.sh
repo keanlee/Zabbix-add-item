@@ -139,11 +139,11 @@ iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT &&
 echo "----->Finshed the firewall,open port:22,80,10050,10051"
              ;;
              no)
-             echo "No iptable ruler "
+             echo "No iptable ruler, you can surf the internet  "
              exit 0
              esac
 }
-read -p "Do you need configer the firewall ruler (yes/no)?: " num
+read -p "Do you need configer the firewall ruler (yes/no)? this will course this server can't surf the internet : " num
 iptable $num
 }
 
