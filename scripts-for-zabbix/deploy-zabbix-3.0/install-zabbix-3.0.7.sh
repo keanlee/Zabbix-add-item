@@ -1,5 +1,7 @@
 #!/bin/sh
 #author by haoli on 13th Oct of 2016
+#wget -r -p -np -k -P ./ http://110.76.187.145/repos/
+
 echo "Hi, Thank for you use this script to deploy zabbix-server, this scrip can be help you deploy zabbix3.0 on 
 CentOS7.1/7.2/7.3 . So please choose your OS "
 function install(){
