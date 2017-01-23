@@ -117,6 +117,8 @@ echo "----->The Selinux Status: $( getenforce)"
     systemctl enable  httpd 1>/dev/null 2>&1
     systemctl start httpd  &&
 echo "----->The httpd daemon is running "
+#add zabbix-database size item 
+sed -i '294 i  UserParameter=get-zabbix-database-size,/etc/zabbix/scripts/get-zabbix-database-size.sh $1 ' /etc/zabbix/zabbix_agentd.conf &&
 #start zabbix-agent daemon
      systemctl enable zabbix-agent 1>/dev/null 2>&1
      systemctl start zabbix-agent &&
