@@ -59,7 +59,7 @@ function clean(){
 #zabbix-count=$(rpm -qa | grep zabbix | wc -l)
 
 function clean(){
-      yum remove zabbix-agent zabbix-sender -y
+      yum erase zabbix-agent zabbix-sender -y
       }
 zabbixcount=$(rpm -qa | grep zabbix | wc -l)
 if [[ $(zabbixcount) -ge 2 ]]; then
