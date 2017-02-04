@@ -26,6 +26,10 @@ EOF
       mv ./zabbix.repo /etc/yum.repos.d/
 }
 # rm -f /etc/yum.repos.d/* &&
+#disable selinux 
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config #disable selinux in conf file 
+setenforce 0  &&
+echo "----->The Selinux Status: $( getenforce)"
 rm -f /etc/yum.repos.d/zabbix*
 yum_zabbix_repo_install &&
 echo "setup zabbix repos successfull"
