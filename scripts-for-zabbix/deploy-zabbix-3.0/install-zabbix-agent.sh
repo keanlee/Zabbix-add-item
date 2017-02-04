@@ -51,7 +51,7 @@ systemctl enable zabbix-agent
 systemctl start zabbix-agent &&
 echo "Zabbix agent has been install, you can go ahead to the zabbix server to add this server to host list ,thanks you use this scrip to install zabbix "
 }
-}
+
 
 function clean(){
       yum remove zabbix-agent zabbix-sender -y 
