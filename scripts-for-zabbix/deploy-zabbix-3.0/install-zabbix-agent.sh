@@ -36,12 +36,13 @@ echo "setup zabbix repos successfull"
 function clean(){
       yum remove zabbix-agent zabbix-sender -y 
       }
-zabbix-count=$(rpm -qa | grep zabbix | wc -l)
-if ( $zabbix-count –ge 2 ){
+#zabbix-count=$(rpm -qa | grep zabbix | wc -l)
+if [[ $(rpm -qa | grep zabbix | wc -l) –ge 2 ]]{
          clean
          }
- else {    }
-yum install zabbix-agent -y   1>/dev/null 2>&1 &&
+ else {   
+ 
+ yum install zabbix-agent -y   1>/dev/null 2>&1 &&
 echo "zabbix-agent installed"
 yum install zabbix-sender -y  1>/dev/null 2>&1 &&
 echo "zabbix-sender installed "
@@ -58,3 +59,5 @@ echo "Has been finish the zabbix-agent conf file setup"
 systemctl enable zabbix-agent 
 systemctl start zabbix-agent &&
 echo "Zabbix agent has been install, you can go ahead to the zabbix server to add this server to host list ,thanks you use this scrip to install zabbix "
+
+ }
