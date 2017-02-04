@@ -2,6 +2,7 @@
 #author by haoli on 24th Jan of 2017
 
 function install(){
+echo -e " \033[1m Begin install zabbix agent 3.0.7 ..."
 yum_zabbix_repo_install()
 {
 
