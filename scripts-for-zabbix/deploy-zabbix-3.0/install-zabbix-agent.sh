@@ -57,8 +57,12 @@ function clean(){
       yum remove zabbix-agent zabbix-sender -y 
       }
 #zabbix-count=$(rpm -qa | grep zabbix | wc -l)
-if [[ $(rpm -qa | grep zabbix | wc -l) –ge 2 ]] then 
+
+function clean(){
+      yum remove zabbix-agent zabbix-sender -y
+      }
+zabbixcount=$(rpm -qa | grep zabbix | wc -l)
+if [[ $(zabbixcount) -ge 2 ]]; then
 clean
-else
-install 
-fi 
+fi
+install
