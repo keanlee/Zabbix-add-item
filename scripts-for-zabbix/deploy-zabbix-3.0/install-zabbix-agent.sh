@@ -36,6 +36,13 @@ echo "setup zabbix repos successfull"
 function clean(){
       yum remove zabbix-agent zabbix-sender -y 
       }
+zabbix-count=$(rpm -qa | grep zabbix | wc -l)
+if ( $zabbix-count –ge 2 ){
+         clean
+         }
+       else {
+    
+}
 yum install zabbix-agent -y   1>/dev/null 2>&1 &&
 echo "zabbix-agent installed"
 yum install zabbix-sender -y  1>/dev/null 2>&1 &&
