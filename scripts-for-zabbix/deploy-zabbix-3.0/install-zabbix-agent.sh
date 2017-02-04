@@ -40,17 +40,15 @@ zabbix-count=$(rpm -qa | grep zabbix | wc -l)
 if ( $zabbix-count –ge 2 ){
          clean
          }
-       else {
-    
-}
+ else {    }
 yum install zabbix-agent -y   1>/dev/null 2>&1 &&
 echo "zabbix-agent installed"
 yum install zabbix-sender -y  1>/dev/null 2>&1 &&
 echo "zabbix-sender installed "
 function config(){
-sed -i 's/Server=127.0.0.1/Server=$1/g' zabbix_agentd.conf
-sed -i 's/ServerActive=127.0.0.1/ServerActive=$2/g'  zabbix_agentd.conf
-sed -i 's/Hostname=Zabbix\ server/Hostname=$3/g'  zabbix_agentd.conf
+sed -i 's/Server=127.0.0.1/Server=$1/g' /etc/zabbix/zabbix_agentd.conf
+sed -i 's/ServerActive=127.0.0.1/ServerActive=$2/g'  /etc/zabbix/zabbix_agentd.conf
+sed -i 's/Hostname=Zabbix\ server/Hostname=$3/g'  /etc/zabbix/zabbix_agentd.conf
 sed -i '167 i HostMetadata=$4' zabbix_agentd.conf
 }
 read -p  "Please type the zabbix-server ip(for example:192.168.0.1), ServerActive's ip(same as server ip),hostname,hostmetadata: " server-ip server-ip1 
