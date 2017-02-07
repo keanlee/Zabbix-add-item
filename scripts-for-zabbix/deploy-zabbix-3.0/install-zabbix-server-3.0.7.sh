@@ -140,6 +140,9 @@ iptables -P INPUT DROP
 iptables -A  INPUT -p tcp --dport 80    -j ACCEPT
 iptables -A  INPUT -p tcp --dport 10050 -j ACCEPT
 iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT &&
+#firewalld 
+#iptables -A IN_public_allow -p tcp -m tcp --dport 10050 -m conntrack --ctstate NEW -j ACCEPT
+
 echo "----->Finshed the firewall,open port:22,80,10050,10051"
              ;;
              no)
