@@ -57,7 +57,7 @@ echo "Please choose which version of zabbix-server you want to install (3.0 or 3
 function choiceversion(){
       case $1 in
        3.2)
-          rpm -ivh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
+          rpm -ivh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm 1>/dev/null 2>&1
        ;; 
        3.0)
         yum_zabbix_repo_install 
