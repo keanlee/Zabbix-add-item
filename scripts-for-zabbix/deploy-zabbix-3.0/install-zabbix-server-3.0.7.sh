@@ -50,9 +50,22 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 EOF
       mv ./zabbix.repo /etc/yum.repos.d/
+      rm -f /etc/yum.repos.d/*
 }
-rm -f /etc/yum.repos.d/* &&
-yum_zabbix_repo_install &&
+#rm -f /etc/yum.repos.d/* &&
+function choice-version(){
+      case $1 in
+       3.2)
+          rpm -ivh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
+   ;; 
+       3.0)
+        yum_zabbix_repo_install &&
+   ;;
+   esac   
+     }
+read -p "Please choose which version of zabbix-server you want to install (3.0/3.2): "  version 
+choice-version $version
+#yum_zabbix_repo_install &&
 echo "setup zabbix repos successfull"
 
 #clean install env 
@@ -85,7 +98,19 @@ mysql -uroot -padmin -e "create database zabbix character set utf8;grant all pri
 echo -e " \033[1m --->All pacakge of zabbix has been installed, Begin to import data to zabbix database ...    "
 
 #import database to mysql 
-zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  && 
+function choice-mysql-data(){
+            case $1 in 
+            3.2)
+            zcat   /usr/share/doc/zabbix-server-mysql-3.2.3/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  &&
+            ;; 
+            3.0)
+            zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  &&
+            ;;
+            esac           
+ }
+choice-mysql-data $version
+
+#zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  && 
 echo "----->Import Zabbix Data Success"
 #configure the zabbix_server.conf,add the DBPassword=zabbix
 sed -i '108 i DBPassword=zabbix' /etc/zabbix/zabbix_server.conf &&
@@ -149,6 +174,7 @@ echo "----->Finshed the firewall,open port:22,80,10050,10051"
              echo "No iptable ruler, you can surf the internet  "
              exit 0
              esac
+             echo "You are installed Zabbix-Version: " $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}')
 }
 read -p "Do you need configer the firewall ruler (yes/no)? this will course this server can't surf the internet : " num
 iptable $num
