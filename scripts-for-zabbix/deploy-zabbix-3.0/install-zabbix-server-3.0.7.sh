@@ -50,9 +50,9 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 EOF
       mv ./zabbix.repo /etc/yum.repos.d/
-      rm -f /etc/yum.repos.d/*
+     
 }
-#rm -f /etc/yum.repos.d/* &&
+rm -f /etc/yum.repos.d/* &&
 echo "Please choose which version of zabbix-server you want to install (3.0 or 3.2): "
 function choiceversion(){
       case $1 in
