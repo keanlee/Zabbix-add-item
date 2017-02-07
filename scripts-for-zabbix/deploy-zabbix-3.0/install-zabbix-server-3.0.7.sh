@@ -170,13 +170,14 @@ echo "----->Finshed the firewall,open port:22,80,10050,10051"
              ;;
              no)
              echo "No iptable ruler, you can surf the internet  "
+             echo "You has been finished zabbix $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}') install "
              exit 0
              esac
              echo "You are installed Zabbix-Version: " $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}')
 }
 read -p "Do you need configer the firewall ruler (yes/no)? this will course this server can't surf the internet : " num
 iptable $num
-echo "You has been finished zabbix $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}') install "
+
 }
 
 function choice(){
