@@ -66,7 +66,7 @@ function choiceversion(){
      }
 #echo "Please choose which version of zabbix-server you want to install (3.0 or 3.2): "  
 read version 
-choiceversion $(version)
+choiceversion $version
 #yum_zabbix_repo_install &&
 echo "setup zabbix repos successfull"
 
