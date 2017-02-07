@@ -70,12 +70,8 @@ choiceversion $version
 #yum_zabbix_repo_install &&
 echo "setup zabbix repos successfull"
 
-#clean install env 
-#set -x
-       yum erase -y zabbix-server-mysql 1>/dev/null 2>&1
-       yum erase -y zabbix-web-mysql 1>/dev/null 2>&1
-       yum erase -y mariadb-server 1>/dev/null 2>&1
-       yum erase -y zabbix-get  1>/dev/null 2>&1
+
+
 #install zabbix 3.0 
 
        yum install zabbix-server-mysql -y 1>/dev/null 2>&1 &&
@@ -199,4 +195,16 @@ function choice(){
           esac
 }
 num=$(cat /etc/redhat-release | awk '{print $4}' | awk -F "." '{print $2}')
+function clean(){
+#clean install env 
+#set -x
+       yum erase -y zabbix-server-mysql 1>/dev/null 2>&1
+       yum erase -y zabbix-web-mysql 1>/dev/null 2>&1
+       yum erase -y mariadb-server 1>/dev/null 2>&1
+       yum erase -y zabbix-get  1>/dev/null 2>&1
+}
+if [ $(rpm -qa | grep zabbix | wc -l) -ge 1 ];then
+clean
+else
 choice $num
+fi
