@@ -176,6 +176,7 @@ echo "----->Finshed the firewall,open port:22,80,10050,10051"
 }
 read -p "Do you need configer the firewall ruler (yes/no)? this will course this server can't surf the internet : " num
 iptable $num
+echo "You has been finished zabbix $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}') install "
 }
 
 function choice(){
