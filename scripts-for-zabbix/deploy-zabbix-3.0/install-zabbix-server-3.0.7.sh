@@ -184,16 +184,19 @@ iptable $num
 
 function choice(){
           case $1 in
-          yes)
+          1)
           # Downgrade the pacakge of systemc, since the higher version cause can't start zabbix-server daemon
           rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7.x86_64.rpm   1>/dev/null 2>&1 
           install
           ;;
-          no)
+          2)
           echo "This script will be deploy zabbix-server on $(cat /etc/redhat-release)"
-          install 
+          install
+          ;;
+          3)
+          install
           exit 0
           esac
 }
-read -p  " Your OS is $(cat /etc/redhat-release). Is that CentOS 7.1? (yes/no)?: " num
+num=$(cat /etc/redhat-release | awk '{print $4}' | awk -F "." '{print $2}')
 choice $num
