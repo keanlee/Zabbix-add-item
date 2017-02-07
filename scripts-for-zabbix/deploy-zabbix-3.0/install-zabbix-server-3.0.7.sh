@@ -53,18 +53,20 @@ EOF
       rm -f /etc/yum.repos.d/*
 }
 #rm -f /etc/yum.repos.d/* &&
-function choice-version(){
+echo "Please choose which version of zabbix-server you want to install (3.0 or 3.2): "
+function choiceversion(){
       case $1 in
        3.2)
           rpm -ivh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
-   ;; 
+       ;; 
        3.0)
-        yum_zabbix_repo_install &&
-   ;;
-   esac   
+        yum_zabbix_repo_install 
+   
+       esac 
      }
-read -p "Please choose which version of zabbix-server you want to install (3.0/3.2): "  version 
-choice-version $version
+#echo "Please choose which version of zabbix-server you want to install (3.0 or 3.2): "  
+read version 
+choiceversion $(version)
 #yum_zabbix_repo_install &&
 echo "setup zabbix repos successfull"
 
@@ -98,17 +100,17 @@ mysql -uroot -padmin -e "create database zabbix character set utf8;grant all pri
 echo -e " \033[1m --->All pacakge of zabbix has been installed, Begin to import data to zabbix database ...    "
 
 #import database to mysql 
-function choice-mysql-data(){
+function choicemysqldata(){
             case $1 in 
             3.2)
-            zcat   /usr/share/doc/zabbix-server-mysql-3.2.3/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  &&
+            zcat   /usr/share/doc/zabbix-server-mysql-3.2.3/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  
             ;; 
             3.0)
-            zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  &&
-            ;;
+            zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  
+           
             esac           
  }
-choice-mysql-data $version
+choicemysqldata $version
 
 #zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  && 
 echo "----->Import Zabbix Data Success"
@@ -184,7 +186,7 @@ function choice(){
           case $1 in
           yes)
           # Downgrade the pacakge of systemc, since the higher version cause can't start zabbix-server daemon
-          rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7.x86_64.rpm   1>/dev/null 2>&1 &&
+          rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7.x86_64.rpm   1>/dev/null 2>&1 
           install
           ;;
           no)
