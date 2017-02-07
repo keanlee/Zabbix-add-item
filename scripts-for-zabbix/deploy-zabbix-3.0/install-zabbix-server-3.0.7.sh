@@ -3,7 +3,7 @@
 #wget -r -p -np -k -P ./ http://110.76.187.145/repos/
 
 echo "Hi, Thank for you use this script to deploy zabbix-server, this scrip can be help you deploy zabbix3.0 on 
-CentOS7.1/7.2/7.3 . So please choose your OS "
+CentOS7.1/7.2/7.3  "
 function install(){
 echo -e " \033[1m Begin install zabbix server 3.0 ..."
  #rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1 &&
