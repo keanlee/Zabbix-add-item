@@ -7,11 +7,11 @@ CentOS7.1/7.2/7.3  "
 function install(){
 echo -e " \033[1m Begin install zabbix server 3.0 ..."
  #rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1 &&
-yum_zabbix_repo_install()
+yum_zabbixbase_repo_install()
 {  
 
-      echo > zabbix.repo
-      cat > ./zabbix.repo << EOF
+      echo > zabbixbase.repo
+      cat > ./zabbixbase.repo << EOF
 
 [base]
 name=Yum base 
@@ -33,7 +33,13 @@ baseurl=http://110.76.187.3/newton/zabbix3.0.7/updates/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
-
+EOF
+      mv ./zabbixbase.repo /etc/yum.repos.d/
+     
+}
+function zabbix3.0repos(){
+            echo > zabbix3.0.repo
+            cat > ./zabbix3.0.repo << EOF
 [zabbix]
 name=Zabbix Official Repository - zabbix
 baseurl=http://110.76.187.3/newton/zabbix3.0.7/zabbix/
@@ -47,21 +53,20 @@ baseurl=http://110.76.187.3/newton/zabbix-non-supported/
 enabled=1
 gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
-
 EOF
-      mv ./zabbix.repo /etc/yum.repos.d/
-     
+    mv ./zabbix3.0.repo /etc/yum.repos.d/
 }
 rm -f /etc/yum.repos.d/* &&
 echo "Please choose which version of zabbix-server you want to install (Note:you can only choose 3.0 or 3.2 to install. 3.0 is LTS Version 3.2 is latest version ): "
 function choiceversion(){
       case $1 in
        3.2)
-          rpm -ivh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm 1>/dev/null 2>&1
+        yum_zabbixbase_repo_install            
+        rpm -ivh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm 1>/dev/null 2>&1
        ;; 
        3.0)
-        yum_zabbix_repo_install 
-   
+        yum_zabbixbase_repo_install 
+        zabbix3.0repos
        esac 
      }
 #echo "Please choose which version of zabbix-server you want to install (3.0 or 3.2): "  
