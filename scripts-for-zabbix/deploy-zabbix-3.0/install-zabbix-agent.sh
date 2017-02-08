@@ -61,8 +61,10 @@ echo "Zabbix agent has been install, you can go ahead to the zabbix server to ad
 
 
 function clean(){
+      echo "Begin clean zabbix agent installed env ..."
       yum erase zabbix-agent zabbix-sender -y
       rm -rf /etc/zabbix
+      echo "Finshed clean env "
       }
 #zabbixcount="$(rpm -qa | grep zabbix | wc -l)"
 if [ $(rpm -qa | grep zabbix | wc -l) -ge 1 ];then
