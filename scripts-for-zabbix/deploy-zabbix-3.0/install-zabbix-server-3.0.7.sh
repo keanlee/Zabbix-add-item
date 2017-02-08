@@ -206,6 +206,7 @@ function clean(){
        yum erase -y zabbix-web-mysql 1>/dev/null 2>&1
        yum erase -y mariadb-server 1>/dev/null 2>&1
        yum erase -y zabbix-get  1>/dev/null 2>&1
+       yum erase -y zabbix-agent 1>/dev/null 2>&1
        yum erase -y  mariadb-server mariadb mariadb-libs 1>/dev/null 2>&1
        rm -rf /var/lib/mysql
        rm -rf /usr/lib64/mysql
