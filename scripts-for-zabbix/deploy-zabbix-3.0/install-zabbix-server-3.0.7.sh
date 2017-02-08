@@ -53,7 +53,7 @@ EOF
      
 }
 rm -f /etc/yum.repos.d/* &&
-echo "Please choose which version of zabbix-server you want to install (3.0 or 3.2): "
+echo "Please choose which version of zabbix-server you want to install (Note:you can only choose 3.0 or 3.2 to install. 3.0 is LTS Version 3.2 is latest version ): "
 function choiceversion(){
       case $1 in
        3.2)
@@ -94,12 +94,12 @@ mysqladmin -uroot password admin &&
 #crate zabbix user of mysql 
 mysql -uroot -padmin -e "create database zabbix character set utf8;grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';flush privileges;" &&
 echo -e " \033[1m --->All pacakge of zabbix has been installed, Begin to import data to zabbix database ...    "
-
 #import database to mysql 
+
 function choicemysqldata(){
             case $1 in 
             3.2)
-            zcat   /usr/share/doc/zabbix-server-mysql-3.2.3/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  
+            zcat   /usr/share/doc/zabbix-server-mysql-$(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}')/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  
             ;; 
             3.0)
             zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  
