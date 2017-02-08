@@ -233,6 +233,7 @@ function clean(){
        rm -rf /etc/my.cnf
        rm -f /etc/yum.repos.d/*
        yum clean all   1>/dev/null 2>&1
+       rm -rf /etc/httpd/conf.d/zabbix.conf
        echo "Finshed clean installed env "
 }
 if [ $(rpm -qa | grep zabbix | wc -l) -ge 1 ];then
