@@ -99,7 +99,8 @@ echo -e " \033[1m --->All pacakge of zabbix has been installed, Begin to import 
 function choicemysqldata(){
             case $1 in 
             3.2)
-            zcat   /usr/share/doc/zabbix-server-mysql-$(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}')/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  
+            zabbixversion=$(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}')
+            zcat   /usr/share/doc/zabbix-server-mysql-$zabbixversion/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  
             ;; 
             3.0)
             zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  
