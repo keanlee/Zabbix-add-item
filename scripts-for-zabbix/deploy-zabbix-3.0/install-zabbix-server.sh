@@ -56,13 +56,27 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 EOF
     mv ./zabbix3.0.repo /etc/yum.repos.d/
 }
+
+Zabbix_latest_version(){
+   echo > zabbix3.2.repo
+   cat > ./zabbix3.2.repo << EOF
+[zabbix]
+name=Zabbix Official Repository - zabbix
+baseurl=http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+EOF
+mv ./zabbix3.2.repo /etc/yum.repos.d/
+}
+
 rm -f /etc/yum.repos.d/* &&
 echo "Please choose which version of zabbix-server you want to install (Note:you can only choose 3.0 or 3.2 to install. 3.0 is LTS Version 3.2 is latest version ): "
 function choiceversion(){
       case $1 in
        3.2)
         yum_zabbixbase_repo_install            
-        rpm -ivh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm 1>/dev/null 2>&1
+        Zabbix_latest_version
        ;; 
        3.0)
         yum_zabbixbase_repo_install 
