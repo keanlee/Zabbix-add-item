@@ -37,7 +37,7 @@ EOF
       mv ./zabbixbase.repo /etc/yum.repos.d/
      
 }
- zabbix_3.0.repos(){
+ zabbix_3.0_.repos(){
             echo > zabbix3.0.repo
             cat > ./zabbix3.0.repo << EOF
 [zabbix]
@@ -66,7 +66,7 @@ function choiceversion(){
        ;; 
        3.0)
         yum_zabbixbase_repo_install 
-        zabbix_3.0.repos
+        zabbix_3.0_.repos
        esac 
      }
 #echo "Please choose which version of zabbix-server you want to install (3.0 or 3.2): "  
