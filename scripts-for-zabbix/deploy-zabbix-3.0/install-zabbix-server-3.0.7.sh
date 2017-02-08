@@ -211,6 +211,7 @@ function clean(){
        rm -rf /var/lib/mysql
        rm -rf /usr/lib64/mysql
        rm -rf /etc/my.cnf
+       rm -f /etc/yum.repos.d/*
        echo "Finshed clean installed env "
 }
 if [ $(rpm -qa | grep zabbix | wc -l) -ge 1 ];then
