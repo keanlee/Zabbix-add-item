@@ -90,8 +90,8 @@ echo "setup zabbix repos successfull"
 
 
 
-#install zabbix 3.0 
-
+#install zabbix server 
+       yum clean all 1>/dev/null 2>&1 
        yum install zabbix-server-mysql -y 1>/dev/null 2>&1 &&
 echo "zabbix-server-mysql installed " 
        yum install zabbix-web-mysql -y  1>/dev/null 2>&1  &&
