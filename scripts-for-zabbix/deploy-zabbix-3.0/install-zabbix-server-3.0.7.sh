@@ -201,13 +201,20 @@ num=$(cat /etc/redhat-release | awk '{print $4}' | awk -F "." '{print $2}')
 function clean(){
 #clean install env 
 #set -x
+       echo "Begin clean installed env..."
        yum erase -y zabbix-server-mysql 1>/dev/null 2>&1
        yum erase -y zabbix-web-mysql 1>/dev/null 2>&1
        yum erase -y mariadb-server 1>/dev/null 2>&1
        yum erase -y zabbix-get  1>/dev/null 2>&1
+       yum erase -y  mariadb-server mariadb mariadb-libs 1>/dev/null 2>&1
+       rm -rf /var/lib/mysql
+       rm -rf /usr/lib64/mysql
+       rm -rf /etc/my.cnf
+       echo "Finshed clean installed env "
 }
 if [ $(rpm -qa | grep zabbix | wc -l) -ge 1 ];then
 clean
+choice $num
 else
 choice $num
 fi
