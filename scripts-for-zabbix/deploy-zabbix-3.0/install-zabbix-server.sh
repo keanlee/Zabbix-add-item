@@ -2,7 +2,7 @@
 #author by haoli on 13th Oct of 2016
 #wget -r -p -np -k -P ./ http://110.76.187.145/repos/
 
-echo "Hi, Thank for you use this script to deploy zabbix-server, this scrip can be help you deploy zabbix3.0 on 
+echo "Hi, Thank for you use this script to deploy zabbix-server, this scrip can be help you deploy zabbix3 on 
 CentOS 7 "
 function install(){
 echo -e " \033[1m Begin install zabbix server 3.0 ..."
