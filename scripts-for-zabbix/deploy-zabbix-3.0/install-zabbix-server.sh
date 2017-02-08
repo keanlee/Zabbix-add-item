@@ -2,7 +2,9 @@
 #author by haoli on 13th Oct of 2016
 #wget -r -p -np -k -P ./ http://110.76.187.145/repos/
 
-echo "Hi, Thank for you use this script to deploy zabbix-server, this scrip can be help you deploy zabbix3 on CentOS 7 "
+echo "Hi, Thank for you use this script to deploy zabbix-server, this scrip can be help you deploy zabbix3 on CentOS 7. 
+      This script also can upgrade zabbix 3.0 to 3.2 or downgrade zabbix 3.2 to 3.0 ,you can execute this script again 
+and choose a new version to installed when you want upgrade or downgrade"
 function install(){
 echo -e " \033[1m Begin install zabbix server  ..."
  #rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1 &&
