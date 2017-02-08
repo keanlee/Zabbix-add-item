@@ -2,10 +2,9 @@
 #author by haoli on 13th Oct of 2016
 #wget -r -p -np -k -P ./ http://110.76.187.145/repos/
 
-echo "Hi, Thank for you use this script to deploy zabbix-server, this scrip can be help you deploy zabbix3 on 
-CentOS 7 "
+echo "Hi, Thank for you use this script to deploy zabbix-server, this scrip can be help you deploy zabbix3 on CentOS 7 "
 function install(){
-echo -e " \033[1m Begin install zabbix server 3.0 ..."
+echo -e " \033[1m Begin install zabbix server  ..."
  #rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1 &&
 yum_zabbixbase_repo_install()
 {  
@@ -71,7 +70,7 @@ mv ./zabbix3.2.repo /etc/yum.repos.d/
 }
 
 rm -f /etc/yum.repos.d/* &&
-echo "Please choose which version of zabbix-server you want to install (Note:you can only choose 3.0 or 3.2 to install. 3.0 is LTS Version 3.2 is latest version ): "
+echo "Please choose which version of zabbix-server you want to install (Note:you can only choose 3.0 or 3.2 to install. 3.0 is LTS Version ,3.2 is latest version ): "
 function choiceversion(){
       case $1 in
        3.2)
