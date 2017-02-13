@@ -43,6 +43,8 @@ sed -i "s/Server=127.0.0.1/Server=$1/g" /etc/zabbix/zabbix_agentd.conf
 sed -i "s/ServerActive=127.0.0.1/ServerActive=$1/g"  /etc/zabbix/zabbix_agentd.conf
 sed -i "s/Hostname=Zabbix\ server/Hostname=$2/g"  /etc/zabbix/zabbix_agentd.conf
 sed -i "167 i HostMetadata=$3"  /etc/zabbix/zabbix_agentd.conf
+mkdir -p /etc/zabbix/scripts &&
+chown -R zabbix:zabbix /etc/zabbix/scripts &&
 }
 #read -p  "Please type the zabbix-server ip(for example:192.168.0.1),hostname,hostmetadata: " serverip hostname hostmetdata
 #config $serverip $hostname $hostmetdata
