@@ -28,6 +28,10 @@ EOF
 }
 # rm -f /etc/yum.repos.d/* &&
 #disable selinux 
+#if you don't want disable selinux, you can disable selinux for zabbix only :
+#setsebool -P httpd_can_connect_zabbix 1
+#setsebool -P zabbix_can_network 1
+
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config #disable selinux in conf file 
 setenforce 0  &&
 echo "----->The Selinux Status: $( getenforce)"
