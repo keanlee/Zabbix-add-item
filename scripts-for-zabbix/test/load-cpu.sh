@@ -1,6 +1,7 @@
 #! /bin/bash
 # author by lihao on Sep 8th of 2017
 echo "Your OS CPU(s) is :"$(lscpu | grep ^CPU\(s\) | awk -F ":" '{print $2}')
+#echo "Your OS mem usage:" free -m |grep -i mem | awk '{print $3/$2*100 "%"}'
 endless_loop()
 {
 echo -ne "i=0;
