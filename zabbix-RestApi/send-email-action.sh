@@ -4,6 +4,7 @@
 #auth= $(cat auth.log | awk -F ':' '{print $3}' | awk -F ',' '{print $1}') | sed 's/\"//g'
 #echo $auth
 
+#curl  -X POST -H "Content-Type: application/json" -d '{"jsonrpc": "2.0", "method":"user.login","params":{"user":"Admin","password":"zabbix"},"id":1}' http://110.76.187.137/zabbix/api_jsonrpc.php 
 
 curl  -X POST -H "Content-Type: application/json" -d '{
 
