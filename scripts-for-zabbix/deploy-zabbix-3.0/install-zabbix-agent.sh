@@ -47,6 +47,7 @@ sed -i "s/Server=127.0.0.1/Server=$1/g" /etc/zabbix/zabbix_agentd.conf
 sed -i "s/ServerActive=127.0.0.1/ServerActive=$1/g"  /etc/zabbix/zabbix_agentd.conf
 sed -i "s/Hostname=Zabbix\ server/Hostname=$2/g"  /etc/zabbix/zabbix_agentd.conf
 sed -i "167 i HostMetadata=$3"  /etc/zabbix/zabbix_agentd.conf
+sed -i  "60 i -A INPUT -p tcp -m multiport --ports 10050 -m comment --comment "zabbix agent " -j ACCEPT " /etc/sysconfig/iptables
 mkdir -p /etc/zabbix/scripts 
 chown -R zabbix:zabbix /etc/zabbix/scripts 
 }
@@ -60,6 +61,7 @@ echo "Please type the HostMetadata: "
 read metadata
 config $zabbixserverip $hostname $metadata
 #echo "Has been finish the zabbix-agent conf file setup"
+systemctl restart iptables
 systemctl enable zabbix-agent 
 systemctl start zabbix-agent &&
 echo "Zabbix agent has been install, you can go ahead to the zabbix server to add this server to host list ,thank you use this scrip to install zabbix-agent "
