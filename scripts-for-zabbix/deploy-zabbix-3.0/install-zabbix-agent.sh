@@ -37,12 +37,12 @@ setenforce 0  &&
 echo "----->The Selinux Status: $( getenforce)"
 #rm -f /etc/yum.repos.d/zabbix*
 #yum_zabbix_repo_install &&
-rpm -ivh zabbix-agent-3.0.7-1.el7.x86_64.rpm 1>/dev/null 2>&1 &&
+rpm -ivh ./packages/zabbix-agent-3.0.7-1.el7.x86_64.rpm 1>/dev/null 2>&1 &&
 #echo "setup zabbix repos successfull"
 #yum install zabbix-agent -y   1>/dev/null 2>&1 &&
 echo -e "\e[1;32m zabbix-agent installed \e[0m"
 #yum install zabbix-sender -y  1>/dev/null 2>&1 &&
-rpm -ivh zabbix-sender-3.0.7-1.el7.x86_64.rpm 1>/dev/null 2>&1 &&
+rpm -ivh ./packages/zabbix-sender-3.0.7-1.el7.x86_64.rpm 1>/dev/null 2>&1 &&
 echo -e "\e[1;32m zabbix-sender installed \e[0m"
 function config(){
 sed -i "s/Server=127.0.0.1/Server=$1/g" /etc/zabbix/zabbix_agentd.conf
