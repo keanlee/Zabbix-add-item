@@ -40,10 +40,10 @@ echo "----->The Selinux Status: $( getenforce)"
 rpm -ivh zabbix-agent-3.0.7-1.el7.x86_64.rpm 1>/dev/null 2>&1 &&
 #echo "setup zabbix repos successfull"
 #yum install zabbix-agent -y   1>/dev/null 2>&1 &&
-echo "zabbix-agent installed"
+echo -e "\e[1;32m zabbix-agent installed \e[0m"
 #yum install zabbix-sender -y  1>/dev/null 2>&1 &&
 rpm -ivh zabbix-sender-3.0.7-1.el7.x86_64.rpm 1>/dev/null 2>&1 &&
-echo "zabbix-sender installed "
+echo -e "\e[1;32m zabbix-sender installed \e[0m"
 function config(){
 sed -i "s/Server=127.0.0.1/Server=$1/g" /etc/zabbix/zabbix_agentd.conf
 sed -i "s/ServerActive=127.0.0.1/ServerActive=$1/g"  /etc/zabbix/zabbix_agentd.conf
@@ -55,18 +55,18 @@ chown -R zabbix:zabbix /etc/zabbix/scripts
 }
 #read -p  "Please type the zabbix-server ip(for example:192.168.0.1),hostname,hostmetadata: " serverip hostname hostmetdata
 #config $serverip $hostname $hostmetdata
-echo "Please type the zabbix-server's ip: "
+echo -e "\e[1;31m Please type the zabbix-server's ip: \e[0m"
 read zabbixserverip
-echo "Plese type the Hostname(This server ip is also ok) that will be show on the zabbix-server (click Configuration->Hosts on web page) : "
+echo -e "\e[1;31m Plese type the Hostname(This server ip is also ok) that will be show on the zabbix-server (click Configuration->Hosts on web page) \e[0m:"
 read hostname 
-echo "Please type the HostMetadata: "
+echo -e "\e[1;31m Please type the HostMetadata: \e[0m"
 read metadata
 config $zabbixserverip $hostname $metadata
 #echo "Has been finish the zabbix-agent conf file setup"
 systemctl restart iptables
 systemctl enable zabbix-agent 
 systemctl start zabbix-agent &&
-echo "Zabbix agent has been install, you can go ahead to the zabbix server to add this server to host list ,thank you use this scrip to install zabbix-agent "
+echo -e "\e[1;32m Zabbix agent has been install, you can go ahead to the zabbix server to add this server to host list ,thank you use this scrip to install zabbix-agent\e[0m "
 }
 
 
