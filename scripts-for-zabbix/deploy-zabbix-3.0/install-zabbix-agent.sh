@@ -49,32 +49,32 @@ sed -i "s/Server=127.0.0.1/Server=$1/g" /etc/zabbix/zabbix_agentd.conf
 sed -i "s/ServerActive=127.0.0.1/ServerActive=$1/g"  /etc/zabbix/zabbix_agentd.conf
 sed -i "s/Hostname=Zabbix\ server/Hostname=$2/g"  /etc/zabbix/zabbix_agentd.conf
 sed -i "167 i HostMetadata=$3"  /etc/zabbix/zabbix_agentd.conf
-sed -i "60 i -A INPUT -p tcp -m multiport --ports 10050 -m comment --comment \"zabbix agent \" -j ACCEPT " /etc/sysconfig/iptables
+sed -i "60 i -A INPUT -p tcp -m multiport --ports 10050 -m comment --comment \"zabbix agent \" -j ACCEPT " /etc/sysconfig/iptables 1>/dev/null 2>&1 
 mkdir -p /etc/zabbix/scripts 
 chown -R zabbix:zabbix /etc/zabbix/scripts 
 }
 #read -p  "Please type the zabbix-server ip(for example:192.168.0.1),hostname,hostmetadata: " serverip hostname hostmetdata
 #config $serverip $hostname $hostmetdata
-echo -e "\e[1;31m Please type the zabbix-server's ip: \e[0m"
+echo -e "\e[1;33m Please type the zabbix-server's ip: \e[0m"
 read zabbixserverip
-echo -e "\e[1;31m Plese type the Hostname(This server ip is also ok) that will be show on the zabbix-server (click Configuration->Hosts on web page) \e[0m:"
+echo -e "\e[1;33m Plese type the Hostname(This server ip is also ok) that will be show on the zabbix-server (click Configuration->Hosts on web page) \e[0m:"
 read hostname 
-echo -e "\e[1;31m Please type the HostMetadata: \e[0m"
+echo -e "\e[1;33m Please type the HostMetadata: \e[0m"
 read metadata
 config $zabbixserverip $hostname $metadata
 #echo "Has been finish the zabbix-agent conf file setup"
-systemctl restart iptables
-systemctl enable zabbix-agent 
+systemctl restart iptables  1>/dev/null 2>&1
+systemctl enable zabbix-agent 1>/dev/null 2>&1  
 systemctl start zabbix-agent &&
 echo -e "\e[1;32m Zabbix agent has been install, you can go ahead to the zabbix server to add this server to host list ,thank you use this scrip to install zabbix-agent\e[0m "
 }
 
 
 function clean(){
-      echo "Begin clean zabbix agent installed env ..."
-      yum erase zabbix-agent zabbix-sender -y
+      echo -e "\e[31m Begin clean zabbix agent installed env ...\e[0m "
+      yum erase zabbix-agent zabbix-sender -y  1>/dev/null 2>&1
       rm -rf /etc/zabbix
-      echo "Finshed clean env "
+      echo -e "\e[32m Finshed clean env \e[0m"
       }
 #zabbixcount="$(rpm -qa | grep zabbix | wc -l)"
 if [ $(rpm -qa | grep zabbix | wc -l) -ge 1 ];then
