@@ -2,12 +2,15 @@
 #author by haoli on 13th Oct of 2016
 #wget -r -p -np -k -P ./ http://110.76.187.145/repos/
 
-echo "Hi, Thank for you use this script to deploy zabbix-server, this scrip can be help you deploy zabbix3 on CentOS 7. 
-      This script also can upgrade zabbix 3.0 to 3.2 or downgrade zabbix 3.2 to 3.0 ,you can execute this script again 
-and choose a new version to installed when you want upgrade or downgrade, but be note: upgrade and downgrade will be 
-delete all data of before"
+echo -e "\e[1;33m Thank for you use this script to deploy zabbix-server, this script 
+can be help you deploy zabbix3 on CentOS 7. This script also can upgrade zabbix 3.0 
+to 3.2 or downgrade zabbix 3.2 to 3.0 ,you can execute this script again and choose 
+a new version to installed when you want upgrade or downgrade, but be note: upgrade 
+and downgrade will be delete all data of before \e[0m"
+
 function install(){
-echo -e " \033[1m Begin install zabbix server  ..."
+#echo -e " \033[1m Begin install zabbix server  ..."
+echo -e "\e[1;32m Begin install zabbix server  ... \e[0m"
  #rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1 &&
 yum_zabbixbase_repo_install()
 {  
@@ -72,8 +75,8 @@ EOF
 mv ./zabbix3.2.repo /etc/yum.repos.d/
 }
 
-rm -f /etc/yum.repos.d/* &&
-echo "Please choose which version of zabbix-server you want to install (Note:you can only choose 3.0 or 3.2 to install. 3.0 is LTS Version ,3.2 is latest version ): "
+rm -f /etc/yum.repos.d/* 
+echo -e "\e[1;33m Please choose which version of zabbix-server you want to install (Note:you can only choose 3.0 or 3.2 to install. 3.0 is LTS Version ,3.2 is latest version ): \e[0m"
 function choiceversion(){
       case $1 in
        3.2)
@@ -89,19 +92,26 @@ function choiceversion(){
 read version 
 choiceversion $version
 #yum_zabbix_repo_install &&
-echo "setup zabbix repos successfull"
-echo "install zabbix server..." 
+#echo "setup zabbix repos successfull"
+echo -e "\e[1;32m setup zabbix repos successfull \e[0m"
+#echo "install zabbix server..." 
        yum clean all 1>/dev/null 2>&1 
        yum install zabbix-server-mysql -y 1>/dev/null 2>&1 &&
-echo "zabbix-server-mysql installed " 
+#echo "zabbix-server-mysql installed "
+echo -e "\e[1;32m zabbix-server-mysql installed \e[0m" 
        yum install zabbix-web-mysql -y  1>/dev/null 2>&1  &&
-echo "zabbix-web-mysql installed "
+#echo "zabbix-web-mysql installed "
+echo -e "\e[1;32m zabbix-web-mysql installed \e[0m"
        yum install mariadb-server -y  1>/dev/null 2>&1  &&
-echo "mariadb-server installed "
+#echo "mariadb-server installed "
+echo -e "\e[1;32m mariadb-server installed \e[0m"
        yum install zabbix-agent -y   1>/dev/null 2>&1 &&
-echo "zabbix-agent installed "
+#echo "zabbix-agent installed "
+echo -e "\e[1;32m zabbix-agent installed \e[0m"
+
        yum install zabbix-get -y 1>/dev/null 2>&1 &&
-echo "zabbix-get installed "
+#echo "zabbix-get installed "
+echo -e "\e[1;32m zabbix-get installed \e[0m"
 
 #start mariadb daemon
 
@@ -111,7 +121,8 @@ systemctl start mariadb
 mysqladmin -uroot password admin && 
 #crate zabbix user of mysql 
 mysql -uroot -padmin -e "create database zabbix character set utf8;grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';flush privileges;" &&
-echo -e " \033[1m --->All pacakge of zabbix has been installed, Begin to import data to zabbix database ...    "
+echo -e " \e[1;32m --->All pacakge of zabbix has been installed, Begin to import data to zabbix database ...   \e[0m "
+#echo -e "\e[1;32m zabbix-sender installed \e[0m"
 #import database to mysql 
 
 function choicemysqldata(){
@@ -128,11 +139,13 @@ function choicemysqldata(){
 choicemysqldata $version
 
 #zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  && 
-echo "----->Import Zabbix Data Success"
+#echo "----->Import Zabbix Data Success"
+echo -e "\e[1;32m ----->Import Zabbix Data Success \e[0m"
 #configure the zabbix_server.conf,add the DBPassword=zabbix
 sed -i '108 i DBPassword=zabbix' /etc/zabbix/zabbix_server.conf &&
 
-echo "----->/etc/zabbix/zabbix_server.conf edited finished "
+echo -e "\e[1;32m ----->/etc/zabbix/zabbix_server.conf edited finished \e[0m"
+#echo -e "\e[1;32m zabbix-sender installed \e[0m"
 
 #edit the alertpath 
 sed -i 's/AlertScriptsPath=\/usr\/lib\/zabbix\/alertscripts/AlertScriptsPath=\/etc\/zabbix\/scripts/' /etc/zabbix/zabbix_server.conf
@@ -142,14 +155,14 @@ cp ./Email.py /etc/zabbix/scripts &&
 cp ./Wechat.py /etc/zabbix/scripts &&
 cp ./get-zabbix-database-size.sh /etc/zabbix/scripts &&
 chown -R zabbix:zabbix /etc/zabbix/scripts &&
-echo "----->Email.py and Wechat.py has been copy to /etc/zabbix/scripts"
+echo -e "\e[1;32m ----->Email.py and Wechat.py has been copy to /etc/zabbix/scripts \e[0m"
 #configure the timezone of zabbix-web
 sed -i '19 i php_value date.timezone Asia/Shanghai ' /etc/httpd/conf.d/zabbix.conf && 
 
 #disable selinux 
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config #disable selinux in conf file 
 setenforce 0  &&
-echo "----->The Selinux Status: $( getenforce)"
+echo -e "\e[1;32m ----->The Selinux Status: $( getenforce) \e[0m"
 
 #start firewalld
 #systemctl start firewalld
@@ -158,43 +171,50 @@ echo "----->The Selinux Status: $( getenforce)"
 
     systemctl enable  httpd 1>/dev/null 2>&1
     systemctl start httpd  &&
-echo "----->The httpd daemon is running "
+echo -e "\e[1;32m ----->The httpd daemon is running \e[0m"
+#echo -e "\e[1;32m zabbix-sender installed \e[0m"
 #add zabbix-database size item 
 sed -i '294 i  UserParameter=get-zabbix-database-size,/etc/zabbix/scripts/get-zabbix-database-size.sh $1 ' /etc/zabbix/zabbix_agentd.conf &&
 #start zabbix-agent daemon
      systemctl enable zabbix-agent 1>/dev/null 2>&1
      systemctl start zabbix-agent &&
-     echo "----->The zabbix-agent daemon is running "
+     echo -e "\e[1;32m ----->The zabbix-agent daemon is running \e[0m"
+#     echo -e "\e[1;32m zabbix-sender installed \e[0m"
 
 #start zabbix-server daemon 
 systemctl enable zabbix-server 1>/dev/null 2>&1
 systemctl start zabbix-server &&
 
-echo "----->Zabbix Server Daemon Has Been Runing" && 
-echo "----->Finshed the firewall,open port:22,80,10050,10051"
-echo "----->Please Go Ahead Zabbix frontend to finished install zabbix server"
-echo "----->PLEASE Login as Admin/zabbix in IP/zabbix by your Browser" 
+echo -e "\e[1;32m ----->Zabbix Server Daemon Has Been Runing \e[0m"  
+#echo "----->Finshed the firewall,open port:22,80,10050,10051"
+echo -e "\e[1;32m ----->Please Go Ahead Zabbix frontend to finished install zabbix server \e[0m"
+echo -e "\e[1;32m ----->PLEASE Login as Admin/zabbix in IP/zabbix by your Browser \e[0m"
+#echo -e "\e[1;32m zabbix-sender installed \e[0m" 
 function iptable(){
            case $1 in
            yes)
 iptables -I  INPUT -p tcp --dport 22    -j ACCEPT
-iptables -P INPUT DROP
+#iptables -P INPUT DROP
 iptables -A  INPUT -p tcp --dport 80    -j ACCEPT
 iptables -A  INPUT -p tcp --dport 10050 -j ACCEPT
 iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT &&
 #firewalld 
 #iptables -A IN_public_allow -p tcp -m tcp --dport 10050 -m conntrack --ctstate NEW -j ACCEPT
 
-echo "----->Finshed the firewall,open port:22,80,10050,10051"
+             echo -e "\e[1;32m ----->Finshed the firewall,open port:22,80,10050,10051 \e[0m"
+             echo -e "\e[1;32m Congratulation !!! You has been finished zabbix $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}') install \e[0m"
+             exit 0
              ;;
              no)
-             echo "No iptable ruler, you can surf the internet  "
-             echo "Congratulation !!! You has been finished zabbix $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}') install "
+             echo -e "\e[1;33m No iptable ruler setup  \e[0m"
+             #echo -e "\e[1;32m zabbix-sender installed \e[0m"
+             echo -e "\e[1;32m Congratulation !!! You has been finished zabbix $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}') install \e[0m"
              exit 0
              esac
              #echo " You are installed Zabbix-Version: " $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}')
 }
-read -p "Do you need configer the firewall ruler (yes/no)? this will course this server can't surf the internet : " num
+warning=$(echo -e "\e[1;33m Do you need configer the firewall ruler (yes/no)? default is no : \e[0m")
+read -p "$warning" num
 iptable $num
 
 }
@@ -219,7 +239,13 @@ num=$(cat /etc/redhat-release | awk '{print $4}' | awk -F "." '{print $2}')
 function clean(){
 #clean install env 
 #set -x
-       echo "Begin clean installed env..."
+       echo -e "\e[1;31m Your OS current installed zabbix server: $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}') \e[0m"
+       note=$(echo -e "\e[1;31m Do you want delete you current installed zabbix server: $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}') \e[0m") 
+       read -p "$note yes or no: " choice
+       function choose(){
+       case $1 in 
+       yes)
+       echo -e "\e[1;31m Begin clean installed env... \e[0m"
        yum erase -y zabbix-server-mysql 1>/dev/null 2>&1
        yum erase -y zabbix-web-mysql 1>/dev/null 2>&1
        yum erase -y mariadb-server 1>/dev/null 2>&1
@@ -234,7 +260,15 @@ function clean(){
        yum clean all   1>/dev/null 2>&1
        rm -rf /etc/httpd
        rm -rf /etc/zabbix/
-       echo "Finshed clean installed env "
+       echo -e "\e[1;32m Finshed clean installed env \e[0m"
+       ;;
+       no)
+       echo -e "\e[1;34m You are not delete zabbix server \e[0m "
+       exit 0
+       esac
+        }
+       choose $choice
+
 }
 if [ $(rpm -qa | grep zabbix | wc -l) -ge 1 ];then
 clean
