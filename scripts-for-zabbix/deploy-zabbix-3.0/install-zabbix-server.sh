@@ -151,9 +151,9 @@ echo -e "\e[1;32m ----->/etc/zabbix/zabbix_server.conf edited finished \e[0m"
 sed -i 's/AlertScriptsPath=\/usr\/lib\/zabbix\/alertscripts/AlertScriptsPath=\/etc\/zabbix\/scripts/' /etc/zabbix/zabbix_server.conf
 
 mkdir -p /etc/zabbix/scripts &&
-cp ./script/Email.py /etc/zabbix/scripts &&
-cp ./script/Wechat.py /etc/zabbix/scripts &&
-cp ./script/get-zabbix-database-size.sh /etc/zabbix/scripts &&
+cp ./scripts/Email.py /etc/zabbix/scripts &&
+cp ./scripts/Wechat.py /etc/zabbix/scripts &&
+cp ./scripts/get-zabbix-database-size.sh /etc/zabbix/scripts &&
 chown -R zabbix:zabbix /etc/zabbix/scripts &&
 echo -e "\e[1;32m ----->Email.py and Wechat.py has been copy to /etc/zabbix/scripts \e[0m"
 #configure the timezone of zabbix-web
