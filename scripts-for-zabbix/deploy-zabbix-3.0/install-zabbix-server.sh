@@ -5,7 +5,7 @@
 echo -e "\e[1;33m Thank for you use this script to deploy zabbix-server, this script 
 can be help you deploy zabbix3 on CentOS 7. This script also can upgrade zabbix 3.0 
 to 3.2 or downgrade zabbix 3.2 to 3.0 ,you can execute this script again and choose 
-a new version to installed when you want upgrade or downgrade, but be note: upgrade 
+a new version to install when you want upgrade or downgrade, but be note: upgrade 
 and downgrade will be delete all data of before \e[0m"
 
 function install(){
@@ -151,9 +151,9 @@ echo -e "\e[1;32m ----->/etc/zabbix/zabbix_server.conf edited finished \e[0m"
 sed -i 's/AlertScriptsPath=\/usr\/lib\/zabbix\/alertscripts/AlertScriptsPath=\/etc\/zabbix\/scripts/' /etc/zabbix/zabbix_server.conf
 
 mkdir -p /etc/zabbix/scripts &&
-cp ./Email.py /etc/zabbix/scripts &&
-cp ./Wechat.py /etc/zabbix/scripts &&
-cp ./get-zabbix-database-size.sh /etc/zabbix/scripts &&
+cp ./script/Email.py /etc/zabbix/scripts &&
+cp ./script/Wechat.py /etc/zabbix/scripts &&
+cp ./script/get-zabbix-database-size.sh /etc/zabbix/scripts &&
 chown -R zabbix:zabbix /etc/zabbix/scripts &&
 echo -e "\e[1;32m ----->Email.py and Wechat.py has been copy to /etc/zabbix/scripts \e[0m"
 #configure the timezone of zabbix-web
