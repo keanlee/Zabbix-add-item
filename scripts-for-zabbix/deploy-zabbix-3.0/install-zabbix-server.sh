@@ -17,27 +17,31 @@ yum_zabbixbase_repo_install()
 
       echo > zabbixbase.repo
       cat > ./zabbixbase.repo << EOF
-
 [base]
-name=Yum base 
-baseurl=http://110.76.187.3/newton/zabbix3.0.7/base/
-enabled=1
+name=CentOS-$releasever - Base
+baseurl=http://110.76.187.220/centos/7/os/x86_64/
 gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
+#released updates
+[updates]
+name=CentOS-$releasever - Updates
+baseurl=http://110.76.187.220/centos/7/updates/x86_64/
+gpgcheck=0
+
+#additional packages that may be useful
 [extras]
-name=Yum extras
-baseurl=http://110.76.187.3/newton/zabbix3.0.7/extras/
-enabled=1
+name=CentOS-$releasever - Extras
+baseurl=http://110.76.187.220/centos/7/extras/x86_64/
 gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
-[update]
-name=Yum update
-baseurl=http://110.76.187.3/newton/zabbix3.0.7/updates/
+###############################epel
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch
+baseurl=http://110.76.187.220/epel/7/x86_64
+failovermethod=priority
 enabled=1
 gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+
 EOF
       mv ./zabbixbase.repo /etc/yum.repos.d/
      
@@ -45,19 +49,19 @@ EOF
  zabbix_version(){
             echo > zabbix3.0.repo
             cat > ./zabbix3.0.repo << EOF
+
 [zabbix]
-name=Zabbix Official Repository - zabbix
-baseurl=http://110.76.187.3/newton/zabbix3.0.7/zabbix/
+name=Zabbix Official Repository - $basearch
+baseurl=http://110.76.187.220/zabbix/3.0/rhel/7/x86_64/
 enabled=1
 gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
 
 [zabbix-non-supported]
-name=Zabbix Official Repository - non-supported
-baseurl=http://110.76.187.3/newton/zabbix-non-supported/
+name=Zabbix Official Repository non-supported - $basearch
+baseurl=http://110.76.187.220/non-supported/rhel/7/x86_64/
 enabled=1
 gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+
 EOF
     mv ./zabbix3.0.repo /etc/yum.repos.d/
 }
@@ -80,12 +84,17 @@ echo -e "\e[1;33m Please choose which version of zabbix-server you want to insta
 function choiceversion(){
       case $1 in
        3.2)
-        yum_zabbixbase_repo_install            
+        wget http://mirrors.aliyun.com/repo/Centos-7.repo  1>/dev/null 2>&1
+        mv Centos-7.repo /etc/yum.repos.d/
+     #   yum_zabbixbase_repo_install            
         Zabbix_latest_version
        ;; 
        3.0)
-        yum_zabbixbase_repo_install 
-        zabbix_version
+        wget http://mirrors.aliyun.com/repo/Centos-7.repo  1>/dev/null 2>&1
+        mv Centos-7.repo /etc/yum.repos.d/
+      #  yum_zabbixbase_repo_install 
+       rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1
+      # zabbix_version
        esac 
      }
 #echo "Please choose which version of zabbix-server you want to install (3.0 or 3.2): "  
@@ -96,20 +105,20 @@ choiceversion $version
 echo -e "\e[1;32m setup zabbix repos successfull \e[0m"
 #echo "install zabbix server..." 
        yum clean all 1>/dev/null 2>&1 
-       yum install zabbix-server-mysql -y 1>/dev/null 2>&1 &&
+       yum install zabbix-server-mysql -y  1>/dev/null 2>&1 &&
 #echo "zabbix-server-mysql installed "
 echo -e "\e[1;32m zabbix-server-mysql installed \e[0m" 
-       yum install zabbix-web-mysql -y  1>/dev/null 2>&1  &&
+       yum install zabbix-web-mysql -y     1>/dev/null 2>&1  &&
 #echo "zabbix-web-mysql installed "
 echo -e "\e[1;32m zabbix-web-mysql installed \e[0m"
-       yum install mariadb-server -y  1>/dev/null 2>&1  &&
+       yum install mariadb-server -y    1>/dev/null 2>&1  &&
 #echo "mariadb-server installed "
 echo -e "\e[1;32m mariadb-server installed \e[0m"
-       yum install zabbix-agent -y   1>/dev/null 2>&1 &&
+       yum install zabbix-agent -y     1>/dev/null 2>&1 &&
 #echo "zabbix-agent installed "
 echo -e "\e[1;32m zabbix-agent installed \e[0m"
 
-       yum install zabbix-get -y 1>/dev/null 2>&1 &&
+       yum install zabbix-get -y   1>/dev/null 2>&1 &&
 #echo "zabbix-get installed "
 echo -e "\e[1;32m zabbix-get installed \e[0m"
 
@@ -132,7 +141,7 @@ function choicemysqldata(){
             zcat   /usr/share/doc/zabbix-server-mysql-$(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}')/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  
             ;; 
             3.0)
-            zcat   /usr/share/doc/zabbix-server-mysql-3.0.7/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  
+            zcat   /usr/share/doc/zabbix-server-mysql-$(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}')/create.sql.gz | mysql -uzabbix  -pzabbix zabbix  
            
             esac           
  }
@@ -223,7 +232,7 @@ function choice(){
           case $1 in
           1)
           # Downgrade the pacakge of systemc, since the higher version cause can't start zabbix-server daemon
-          rpm -Uvh --force http://110.76.187.3/repos/zabbix-2016-09-19/gnutls-3.1.18-8.el7.x86_64.rpm   1>/dev/null 2>&1 
+          rpm -Uvh --force ./pacakges/gnutls-3.1.18-8.el7.x86_64.rpm   1>/dev/null 2>&1 
           install
           ;;
           2)
@@ -253,6 +262,7 @@ function clean(){
        yum erase -y zabbix-agent 1>/dev/null 2>&1
        yum erase -y  mariadb-server mariadb mariadb-libs 1>/dev/null 2>&1
        yum erase -y zabbix-release 1>/dev/null 2>&1
+       yum erase -y  httpd httpd-tools 1>/dev/null 2>&1 
        rm -rf /var/lib/mysql
        rm -rf /usr/lib64/mysql
        rm -rf /etc/my.cnf
