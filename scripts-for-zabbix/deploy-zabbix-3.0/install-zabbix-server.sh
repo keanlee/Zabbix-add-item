@@ -11,90 +11,24 @@ and downgrade will be delete all data of before \e[0m"
 function install(){
 #echo -e " \033[1m Begin install zabbix server  ..."
 echo -e "\e[1;32m Begin install zabbix server  ... \e[0m"
- #rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1 &&
-yum_zabbixbase_repo_install()
-{  
-
-      echo > zabbixbase.repo
-      cat > ./zabbixbase.repo << EOF
-[base]
-name=CentOS-$releasever - Base
-baseurl=http://110.76.187.220/centos/7/os/x86_64/
-gpgcheck=0
-
-#released updates
-[updates]
-name=CentOS-$releasever - Updates
-baseurl=http://110.76.187.220/centos/7/updates/x86_64/
-gpgcheck=0
-
-#additional packages that may be useful
-[extras]
-name=CentOS-$releasever - Extras
-baseurl=http://110.76.187.220/centos/7/extras/x86_64/
-gpgcheck=0
-
-###############################epel
-[epel]
-name=Extra Packages for Enterprise Linux 7 - $basearch
-baseurl=http://110.76.187.220/epel/7/x86_64
-failovermethod=priority
-enabled=1
-gpgcheck=0
-
-EOF
-      mv ./zabbixbase.repo /etc/yum.repos.d/
-     
-}
- zabbix_version(){
-            echo > zabbix3.0.repo
-            cat > ./zabbix3.0.repo << EOF
-
-[zabbix]
-name=Zabbix Official Repository - $basearch
-baseurl=http://110.76.187.220/zabbix/3.0/rhel/7/x86_64/
-enabled=1
-gpgcheck=0
-
-[zabbix-non-supported]
-name=Zabbix Official Repository non-supported - $basearch
-baseurl=http://110.76.187.220/non-supported/rhel/7/x86_64/
-enabled=1
-gpgcheck=0
-
-EOF
-    mv ./zabbix3.0.repo /etc/yum.repos.d/
-}
-
-Zabbix_latest_version(){
-   echo > zabbix3.2.repo
-   cat > ./zabbix3.2.repo << EOF
-[zabbix]
-name=Zabbix Official Repository - zabbix
-baseurl=http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/
-enabled=1
-gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
-EOF
-mv ./zabbix3.2.repo /etc/yum.repos.d/
-}
-
+#mkdir /etc/yum.repos.d/bak
+#mv /etc/yum.repos.d/*  /etc/yum.repos.d/bak/  1>/dev/null 2>&1 
 rm -f /etc/yum.repos.d/* 
 echo -e "\e[1;33m Please choose which version of zabbix-server you want to install (Note:you can only choose 3.0 or 3.2 to install. 3.0 is LTS Version ,3.2 is latest version ): \e[0m"
+#this functin is setup the yum repo, you can change the repo on ./repo dir
 function choiceversion(){
       case $1 in
        3.2)
-        wget http://mirrors.aliyun.com/repo/Centos-7.repo  1>/dev/null 2>&1
-        mv Centos-7.repo /etc/yum.repos.d/
-     #   yum_zabbixbase_repo_install            
-        Zabbix_latest_version
+       cp ./repo/Centos-7.repo    /etc/yum.repos.d/
+       cp ./repo/Centos-epel.repo   /etc/yum.repos.d/
+       cp ./repo/zabbix3.2.repo  /etc/yum.repos.d/
        ;; 
        3.0)
-        wget http://mirrors.aliyun.com/repo/Centos-7.repo  1>/dev/null 2>&1
-        mv Centos-7.repo /etc/yum.repos.d/
-      #  yum_zabbixbase_repo_install 
-       rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1
-      # zabbix_version
+       cp ./repo/Centos-7.repo  /etc/yum.repos.d/
+       cp ./repo/Centos-epel.repo   /etc/yum.repos.d/
+       cp ./repo/zabbix3.0.repo   /etc/yum.repos.d/
+
+     # rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1
        esac 
      }
 #echo "Please choose which version of zabbix-server you want to install (3.0 or 3.2): "  
@@ -211,12 +145,12 @@ iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT &&
 #firewalld 
 #iptables -A IN_public_allow -p tcp -m tcp --dport 10050 -m conntrack --ctstate NEW -j ACCEPT
 
-             echo -e "\e[1;32m ----->Finshed the firewall,open port:22,80,10050,10051 \e[0m"
+             echo -e "\e[1;32m ----->Finshed the firewall rule setup ,open port:22,80,10050,10051 \e[0m"
              echo -e "\e[1;32m Congratulation !!! You has been finished zabbix $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}') install \e[0m"
              exit 0
              ;;
              no)
-             echo -e "\e[1;33m No iptable ruler setup  \e[0m"
+             echo -e "\e[1;33m No firewall rule setup  \e[0m"
              #echo -e "\e[1;32m zabbix-sender installed \e[0m"
              echo -e "\e[1;32m Congratulation !!! You has been finished zabbix $(rpm -qa | grep zabbix-web-mysql | awk -F "-" '{print $4}') install \e[0m"
              exit 0
@@ -263,7 +197,8 @@ function clean(){
        yum erase -y zabbix-agent 1>/dev/null 2>&1
        yum erase -y  mariadb-server mariadb mariadb-libs 1>/dev/null 2>&1
        yum erase -y zabbix-release 1>/dev/null 2>&1
-       yum erase -y  httpd httpd-tools 1>/dev/null 2>&1 
+       yum erase -y  httpd httpd-tools 1>/dev/null 2>&1
+       yum erase -y zabbix-sender 1>/dev/null 2>&1 
        rm -rf /var/lib/mysql
        rm -rf /usr/lib64/mysql
        rm -rf /etc/my.cnf
