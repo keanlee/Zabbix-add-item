@@ -19,13 +19,11 @@ echo -e "\e[1;33m Please choose which version of zabbix-server you want to insta
 function choiceversion(){
       case $1 in
        3.2)
-       cp ./repo/Centos-7.repo    /etc/yum.repos.d/
-       cp ./repo/Centos-epel.repo   /etc/yum.repos.d/
+       cp ./repo/Cent*  /etc/yum.repos.d/
        cp ./repo/zabbix3.2.repo  /etc/yum.repos.d/
        ;; 
        3.0)
-       cp ./repo/Centos-7.repo  /etc/yum.repos.d/
-       cp ./repo/Centos-epel.repo   /etc/yum.repos.d/
+       cp ./repo/Cent*  /etc/yum.repos.d/
        cp ./repo/zabbix3.0.repo   /etc/yum.repos.d/
 
      # rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm  1>/dev/null 2>&1
