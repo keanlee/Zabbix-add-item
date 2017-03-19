@@ -3,7 +3,7 @@
 
 ZABBIXSERVER=                     #zabbix server ip 
 HOSTNAME=$(hostname)              #hostname will be display on zabbix server web page 
-METADATA=agent                    #this will be used for auto Auto registration
+METADATA=                         #this will be used for auto Auto registration
 
 function install(){
 #-----------------Disable selinux-----------------
@@ -25,6 +25,13 @@ sed -i "167 i HostMetadata=$METADATA"  /etc/zabbix/zabbix_agentd.conf
 sed -i "60 i -A INPUT -p tcp -m multiport --ports 10050 -m comment --comment \"zabbix agent \" -j ACCEPT " /etc/sysconfig/iptables 1>/dev/null 2>&1 
 mkdir -p /etc/zabbix/scripts 
 chown -R zabbix:zabbix /etc/zabbix/scripts 
+
+#--------------add ceph support -------------------------
+if [ $METADATA = ceph ];then
+usermod -a -G ceph zabbix
+else
+continue
+fi
 
 systemctl restart iptables  1>/dev/null 2>&1
 systemctl enable zabbix-agent 1>/dev/null 2>&1  
