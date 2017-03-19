@@ -14,6 +14,7 @@ echo -e "\e[1;31m Your OS current installed zabbix server: $(rpm -qa | grep zabb
        yum erase -y  mariadb-server mariadb mariadb-libs 1>/dev/null 2>&1
        yum erase -y zabbix-release 1>/dev/null 2>&1
        yum erase -y  httpd httpd-tools 1>/dev/null 2>&1
+       yum erase -y  zabbix-sender 1>/dev/null 2>&1
        rm -rf /var/lib/mysql
        rm -rf /usr/lib64/mysql
        rm -rf /etc/my.cnf
