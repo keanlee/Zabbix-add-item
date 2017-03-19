@@ -1,7 +1,0 @@
-[zabbix]
-name=Zabbix Official Repository - zabbix
-baseurl=http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/
-enabled=1
-gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
-
