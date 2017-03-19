@@ -59,15 +59,3 @@ systemctl enable zabbix-server 1>/dev/null 2>&1
 systemctl start zabbix-server &&
 echo -e "\e[1;32m ----->Zabbix Server Daemon Has Been Runing \e[0m"  
 
-
-
-
-
-
-
-
-
-
-
-
-
