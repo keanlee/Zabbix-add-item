@@ -181,7 +181,7 @@ num=$(cat /etc/redhat-release | awk '{print $4}' | awk -F "." '{print $2}')
 function clean(){
 #clean install env 
 #set -x
-    source ./clean.sh  
+    source ./modularization/clean.sh  
       }
 
 if [ $(rpm -qa | grep zabbix | wc -l) -ge 1 ];then
