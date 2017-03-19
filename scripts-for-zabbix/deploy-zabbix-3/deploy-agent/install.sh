@@ -1,9 +1,9 @@
 #!/bin/bash 
 #author by lihao in 2017
 
-ZABBIXSERVER=110.23.3.3
-HOSTNAME=$(hostname)
-METADATA=agent
+ZABBIXSERVER=                     #zabbix server ip 
+HOSTNAME=$(hostname)              #hostname will be display on zabbix server web page 
+METADATA=agent                    #this will be used for auto Auto registration
 
 function install(){
 #-----------------Disable selinux-----------------
