@@ -1,9 +1,8 @@
 #!/bin/bash 
 #author by lihao in 2017
-
 ZABBIXSERVER=                     #zabbix server ip 
 HOSTNAME=$(hostname)              #hostname will be display on zabbix server web page 
-METADATA=                         #this will be used for auto Auto registration
+METADATA=                         #For Openstack option is controller/compute/ceph this will be used for auto Auto registration
 
 function install(){
 #-----------------Disable selinux-----------------
