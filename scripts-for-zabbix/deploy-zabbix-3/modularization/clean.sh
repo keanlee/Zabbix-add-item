@@ -24,7 +24,7 @@ echo -e "\e[1;31m Your OS current installed zabbix server: $(rpm -qa | grep zabb
        echo -e "\e[1;32m Finshed clean installed env \e[0m"
        ;;
        no)
-       echo -e "\e[1;34m You are not delete zabbix server \e[0m "
+       echo -e "\e[1;34m You didn't delete zabbix server \e[0m "
        exit 0
        esac 
 }
