@@ -22,8 +22,19 @@ sed -i "s/ServerActive=127.0.0.1/ServerActive=$ZABBIXSERVER/g"  /etc/zabbix/zabb
 sed -i "s/Hostname=Zabbix\ server/Hostname=$HOSTNAME/g"  /etc/zabbix/zabbix_agentd.conf
 sed -i "167 i HostMetadata=$METADATA"  /etc/zabbix/zabbix_agentd.conf
 sed -i "60 i -A INPUT -p tcp -m multiport --ports 10050 -m comment --comment \"zabbix agent \" -j ACCEPT " /etc/sysconfig/iptables 1>/dev/null 2>&1 
-mkdir -p /etc/zabbix/scripts 
-chown -R zabbix:zabbix /etc/zabbix/scripts 
+#--------------add item by manual------------------- 
+mkdir -p /etc/zabbix/scripts
+chown -R zabbix:zabbix /etc/zabbix/scripts
+cp ./script/common/serviceexist.sh /etc/zabbix/script
+sed -i '294 i  UserParameter=openstack.serviceexist[*],/etc/zabbix/scripts/serviceexist.sh $1 ' /etc/zabbix/zabbix_agentd.conf
+
+#--------------For openstack controller item ---------
+if [ $METADATA = controller ];then
+cp ./script/controller/check-process-status-openstack.sh  /etc/zabbix/scipt
+sed -i '295 i UserParameter=check-process-status-openstack[*],/etc/zabbix/scripts/check-process-status-openstack.sh $1 ' /etc/zabbix/zabbix_agentd.conf
+else 
+continue 
+fi 
 
 #--------------add ceph support -------------------------
 if [ $METADATA = ceph ];then
