@@ -1,3 +1,4 @@
+#for internal access, you can use 10.0.192.11 to replace 110.76.187.100
 [base]
 name=CentOS-$releasever - Base
 baseurl=http://110.76.187.100/centos/$releasever/os/$basearch/
