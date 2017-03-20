@@ -17,12 +17,12 @@ echo -e "\e[1;33m Please choose which version of zabbix-server you want to insta
 function choiceversion(){
       case $1 in
        3.2)
-       cp ./repo/Cent*  /etc/yum.repos.d/
-       cp ./repo/zabbix3.2.repo  /etc/yum.repos.d/
+       cp ./repo/*  /etc/yum.repos.d/
+       #cp ./repo/zabbix3.2.repo  /etc/yum.repos.d/
        ;; 
        3.0)
-       cp ./repo/Cent*  /etc/yum.repos.d/
-       cp ./repo/zabbix3.0.repo   /etc/yum.repos.d/
+       cp ./repo/*  /etc/yum.repos.d/
+       #cp ./repo/zabbix3.0.repo   /etc/yum.repos.d/
        esac 
      }
 read VERSION
