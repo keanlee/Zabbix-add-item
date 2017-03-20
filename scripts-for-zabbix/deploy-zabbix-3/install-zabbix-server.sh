@@ -18,7 +18,7 @@ function choiceversion(){
       case $1 in
        3.2)
        cp ./repo/*  /etc/yum.repos.d/
-       #cp ./repo/zabbix3.2.repo  /etc/yum.repos.d/
+       rpm -ivh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm  1>/dev/null 2>&1
        ;; 
        3.0)
        cp ./repo/*  /etc/yum.repos.d/
@@ -27,8 +27,8 @@ function choiceversion(){
      }
 read VERSION
 choiceversion $VERSION
-
 echo -e "\e[1;32m setup zabbix repos successfull \e[0m"
+
 #------------------execute the install script --------
 source ./modularization/install.sh 
 source ./modularization/firewall.sh
