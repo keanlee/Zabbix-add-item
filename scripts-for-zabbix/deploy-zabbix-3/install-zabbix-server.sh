@@ -2,7 +2,13 @@
 #author by haoli on 13th Oct of 2016
 #wget -r -p -np -k -P ./ http://110.76.187.145/repos/
 README=$(cat ./README.txt)
+OS=$(cat /etc/redhat-release | awk '{print $1}')
+if [ $OS = Red ];then
+OSVERSION=$(cat /etc/redhat-release | awk '{print $7}' | awk -F "." '{print $2}')
+else
 OSVERSION=$(cat /etc/redhat-release | awk '{print $4}' | awk -F "." '{print $2}')
+fi
+
 echo -e "\e[1;33m $README \e[0m"
 
 function install(){
