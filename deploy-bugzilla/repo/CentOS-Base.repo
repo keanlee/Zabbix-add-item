@@ -1,0 +1,29 @@
+[base]
+name=Yum base 
+baseurl=http://10.245.58.150/repos/centos7.3/base/
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+
+[extras]
+name=Yum extras
+baseurl=http://10.245.58.150/repos/centos7.3/extras/
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+
+[update]
+name=Yum update
+baseurl=http://10.245.58.150/repos/centos7.3/updates/
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+
+
+
+
+
+
+
+
+

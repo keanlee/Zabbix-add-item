@@ -1,0 +1,7 @@
+[epel]
+name=epel
+baseurl=http://10.245.58.150/repos/centos7.3/epel/
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+
