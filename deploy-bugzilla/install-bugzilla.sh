@@ -47,10 +47,10 @@ perl checksetup.pl   1>/dev/null
 perl install-module.pl --all   1>/dev/null
 perl checksetup.pl 1>/dev/null   2>&1
 #-------change the ./localconfig
-rm -f ./localconfig
+rm -f /var/www/html/bugzilla/localconfig
 
 cd $(cd `dirname $0`; pwd)
-cp ./conf/localconfig  /var/www/html/bugzilla/
+cp /root/deploy-bugzilla/conf/localconfig  /var/www/html/bugzilla/
 
 #setup admin user and password 
 cd /var/www/html/bugzilla
@@ -62,7 +62,7 @@ sed -i 's/^Options -Indexes$/#Options -Indexes/g' ./.htaccess
 
 #-------Configure Apache to host our Bugzilla installation-----------
 cd $(cd `dirname $0`; pwd)
-cp ./conf/bugzilla.conf /etc/httpd/conf.d
+cp /root/deploy-bugzilla/conf/bugzilla.conf  /etc/httpd/conf.d
 systemctl start httpd.service
 systemctl enable httpd.service
 
