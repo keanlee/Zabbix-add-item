@@ -24,8 +24,9 @@ sed -i "167 i HostMetadata=$METADATA"  /etc/zabbix/zabbix_agentd.conf
 sed -i "60 i -A INPUT -p tcp -m multiport --ports 10050 -m comment --comment \"zabbix agent \" -j ACCEPT " /etc/sysconfig/iptables 1>/dev/null 2>&1 
 #--------------add item by manual------------------- 
 mkdir -p /etc/zabbix/scripts
-chown -R zabbix:zabbix /etc/zabbix/scripts
 cp ./script/common/serviceexist.sh /etc/zabbix/script
+chown -R zabbix:zabbix /etc/zabbix/scripts
+
 sed -i '294 i  UserParameter=openstack.serviceexist[*],/etc/zabbix/scripts/serviceexist.sh $1 ' /etc/zabbix/zabbix_agentd.conf
 
 #--------------For openstack controller item ---------
