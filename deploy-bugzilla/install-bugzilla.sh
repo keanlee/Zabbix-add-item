@@ -22,15 +22,15 @@ yum install gcc gcc-c++ graphviz graphviz-devel patchutils gd gd-devel wget perl
 echo $GREEN all dependence of bugzilla has bee installed $NO_COLOR
 
 #---------------configuer the firewall -
-firewall-cmd --zone=public --add-port=80/tcp --permanent
-firewall-cmd --reload
+firewall-cmd --zone=public --add-port=80/tcp --permanent 1>/dev/null 2>&1
+firewall-cmd --reload             1>/dev/null 2>&1
 
 #--------setup mariadb ----------------------------
 sed -i '11 i # Bugzilla ' /etc/my.cnf
 sed -i '12 i # maximum allowed size of an attachment upload ' /etc/my.cnf
 sed -i '13 i #change this if you need more! ' /etc/my.cnf
 sed -i '14 i max_allowed_packet=4M ' /etc/my.cnf 
-systemctl enable mariadb.service
+systemctl enable mariadb.service  1>/dev/null 2>&1
 systemctl start mariadb.service
 
 mysqladmin -uroot password admin &&
