@@ -9,7 +9,7 @@ sed -i "60 i -A INPUT -p tcp -m multiport --ports 22 -m comment --comment \"sshd
 #iptables -P INPUT DROP
 sed -i "61 i -A INPUT -p tcp -m multiport --ports 10050 -m comment --comment \"zabbix server \" -j ACCEPT " /etc/sysconfig/iptables
 sed -i "62 i -A INPUT -p tcp -m multiport --ports 10051 -m comment --comment \"zabbix server \" -j ACCEPT " /etc/sysconfig/iptables
-sed -i "60 i -A INPUT -p tcp -m multiport --ports 80 -m comment --comment \"httpd \" -j ACCEPT " /etc/sysconfig/iptables
+sed -i "63 i -A INPUT -p tcp -m multiport --ports 80 -m comment --comment \"httpd \" -j ACCEPT " /etc/sysconfig/iptables
 systemctl restart iptables
 #vim /etc/sysconfig/iptables
 #firewalld 
