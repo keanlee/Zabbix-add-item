@@ -63,8 +63,8 @@ sed -i 's/^Options -Indexes$/#Options -Indexes/g' ./.htaccess
 #-------Configure Apache to host our Bugzilla installation-----------
 cd $(cd `dirname $0`; pwd)
 cp /root/deploy-bugzilla/conf/bugzilla.conf  /etc/httpd/conf.d
-systemctl start httpd.service  1>/dev/null 2>&1
-systemctl enable httpd.service
+systemctl start httpd.service  
+systemctl enable httpd.service 1>/dev/null 2>&1
 
 #----------------done ----------------------
 echo $GREEN Voila! You have now a working Bugzilla 5.0 installation on $(cat /etc/redhat-release). You can now continue to setup the details of Bugzilla within the Bugzilla web interface. $NO_COLOR
