@@ -10,6 +10,7 @@ iptables -I  INPUT -p tcp --dport 22    -j ACCEPT
 iptables -A  INPUT -p tcp --dport 80    -j ACCEPT
 iptables -A  INPUT -p tcp --dport 10050 -j ACCEPT
 iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT &&
+#vim /etc/sysconfig/iptables
 #firewalld 
 #iptables -A IN_public_allow -p tcp -m tcp --dport 10050 -m conntrack --ctstate NEW -j ACCEPT
 
