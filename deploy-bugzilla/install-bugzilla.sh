@@ -10,7 +10,7 @@ RED="$ESC[0;31m"
 #--------config yum repo on this server----------
 rm -rf /etc/yum.repos.d/*
 cp ./repo/*  /etc/yum.repos.d/
-echo -e "\e[1;32m setup zabbix repos successfull \e[0m"
+echo $GREEN setup zabbix repos successfull $NO_COLOR
 
 #-----------install dependence for install bugzilla-----------------------------------
 #DO NOT INSTALL the package perl-homedir, because this would break the Bugzilla installation.
@@ -19,7 +19,7 @@ echo -e "\e[1;32m setup zabbix repos successfull \e[0m"
 yum install httpd httpd-devel mod_ssl mod_ssl mod_perl mod_perl-devel  -y 1>/dev/null 2>&1
 yum install mariadb-server mariadb mariadb-devel php-mysql  -y 1>/dev/null 2>&1
 yum install gcc gcc-c++ graphviz graphviz-devel patchutils gd gd-devel wget perl* -x perl-homedir -y 1>/dev/null 2>&1
-echo "all dependence of bugzilla has bee installed "
+echo $GREEN all dependence of bugzilla has bee installed $NO_COLOR
 
 #---------------configuer the firewall -
 firewall-cmd --zone=public --add-port=80/tcp --permanent
@@ -35,7 +35,7 @@ systemctl start mariadb.service
 
 mysqladmin -uroot password admin &&
 mysql -uroot -padmin -e "create database bugs character set utf8;grant all privileges on bugs.* to bugs@localhost identified by 'bugzilla';flush privileges;"
-echo "The database is bugs and password is bugzilla"
+echo The database name is  $GREEN bugs $NO_COLOR and password is $GREEN bugzilla $NO_COLOR 
 
 #-----------install bugzilla---------------
 tar -xf ./source/bugzilla-5.0.tar.gz
@@ -67,5 +67,5 @@ systemctl start httpd.service
 systemctl enable httpd.service
 
 #----------------done ----------------------
-echo "Voila! You have now a working Bugzilla 5.0 installation on $(cat /etc/redhat-release). You can now continue to setup the details of Bugzilla within the Bugzilla web interface."
+echo $GREEN Voila! You have now a working Bugzilla 5.0 installation on $(cat /etc/redhat-release). You can now continue to setup the details of Bugzilla within the Bugzilla web interface. $NO_COLOR
 echo "Use a browser and open http://ip-of-your-server/ (replace ip-of-your-server with the ip address of your server). You should now see the Bugzilla page "
