@@ -15,7 +15,7 @@ echo $GREEN setup zabbix repos successfull $NO_COLOR
 #-----------install dependence for install bugzilla-----------------------------------
 #DO NOT INSTALL the package perl-homedir, because this would break the Bugzilla installation.
 #('perl-homedir' would install perl modules in user folders which won't be accessible by Bugzilla so absolutely do not install it!)
-
+echo $GREEN Begin to installing dependence of bugzilla $NO_COLOR
 yum install httpd httpd-devel mod_ssl mod_ssl mod_perl mod_perl-devel  -y 1>/dev/null 2>&1
 yum install mariadb-server mariadb mariadb-devel php-mysql  -y 1>/dev/null 2>&1
 yum install gcc gcc-c++ graphviz graphviz-devel patchutils gd gd-devel wget perl* -x perl-homedir -y 1>/dev/null 2>&1
@@ -35,13 +35,14 @@ systemctl start mariadb.service
 
 mysqladmin -uroot password admin &&
 mysql -uroot -padmin -e "create database bugs character set utf8;grant all privileges on bugs.* to bugs@localhost identified by 'bugzilla';flush privileges;"
-echo The database name is  $GREEN bugs $NO_COLOR and password is $GREEN bugzilla $NO_COLOR 
+echo Finished the DB created, the database name is  $GREEN bugs $NO_COLOR and password is $GREEN bugzilla $NO_COLOR 
 
 #-----------install bugzilla---------------
 tar -xf ./source/bugzilla-5.0.tar.gz
 mv bugzilla-5.0/ /var/www/html/bugzilla/
 
 #---------perl /var/www/html/bugzilla/checksetup.pl
+echo $GREEN Begin to installing bugzilla, please be wait ... $NO_COLOR
 cd /var/www/html/bugzilla
 perl checksetup.pl   1>/dev/null 
 perl install-module.pl --all   1>/dev/null 2>&1
