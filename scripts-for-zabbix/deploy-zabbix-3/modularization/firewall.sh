@@ -5,11 +5,12 @@ WARNING=$(echo -e "\e[1;33m Do you need configer the firewall ruler (yes/no)? de
 function iptable(){
            case $1 in
            yes)
-iptables -I  INPUT -p tcp --dport 22    -j ACCEPT
+sed -i "60 i -A INPUT -p tcp -m multiport --ports 22 -m comment --comment \"sshd \" -j ACCEPT " /etc/sysconfig/iptables
 #iptables -P INPUT DROP
-iptables -A  INPUT -p tcp --dport 80    -j ACCEPT
-iptables -A  INPUT -p tcp --dport 10050 -j ACCEPT
-iptables -A  INPUT -p tcp --dport 10051 -j ACCEPT &&
+sed -i "61 i -A INPUT -p tcp -m multiport --ports 10050 -m comment --comment \"zabbix server \" -j ACCEPT " /etc/sysconfig/iptables
+sed -i "62 i -A INPUT -p tcp -m multiport --ports 10051 -m comment --comment \"zabbix server \" -j ACCEPT " /etc/sysconfig/iptables
+sed -i "60 i -A INPUT -p tcp -m multiport --ports 80 -m comment --comment \"httpd \" -j ACCEPT " /etc/sysconfig/iptables
+systemctl restart iptables
 #vim /etc/sysconfig/iptables
 #firewalld 
 #iptables -A IN_public_allow -p tcp -m tcp --dport 10050 -m conntrack --ctstate NEW -j ACCEPT
