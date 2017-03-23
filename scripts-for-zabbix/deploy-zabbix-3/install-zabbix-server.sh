@@ -13,7 +13,7 @@ echo -e "\e[1;33m $README \e[0m"
 
 function install(){
 #echo -e " \033[1m Begin install zabbix server  ..."
-echo -e "\e[1;32m Begin install zabbix server  ... \e[0m"
+echo -e "\e[1;36m Begin install zabbix server  ... \e[0m"
 #mkdir /etc/yum.repos.d/bak
 #mv /etc/yum.repos.d/*  /etc/yum.repos.d/bak/  1>/dev/null 2>&1 
 rm -rf /etc/yum.repos.d/* 
@@ -33,7 +33,7 @@ function choiceversion(){
      }
 read VERSION
 choiceversion $VERSION
-echo -e "\e[1;32m setup zabbix repos successfull \e[0m"
+echo -e "\e[1;36m setup zabbix repos successfull \e[0m"
 
 #------------------execute the install script --------
 source ./modularization/install.sh 
