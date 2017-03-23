@@ -44,8 +44,8 @@ mv bugzilla-5.0/ /var/www/html/bugzilla/
 #---------perl /var/www/html/bugzilla/checksetup.pl
 cd /var/www/html/bugzilla
 perl checksetup.pl   1>/dev/null 
-perl install-module.pl --all   1>/dev/null
-perl checksetup.pl 1>/dev/null   2>&1
+perl install-module.pl --all   1>/dev/null 2>&1
+perl checksetup.pl   1>/dev/null  2>&1
 #-------change the ./localconfig
 rm -f /var/www/html/bugzilla/localconfig
 
@@ -54,7 +54,7 @@ cp /root/deploy-bugzilla/conf/localconfig  /var/www/html/bugzilla/
 
 #setup admin user and password 
 cd /var/www/html/bugzilla
-perl checksetup.pl
+perl checksetup.pl  2>/dev/null 
 
 
 #At this point we are nearly done. Execute the following line to comment out a line in the .htaccess file that the Bugzilla installation script created:
@@ -63,7 +63,7 @@ sed -i 's/^Options -Indexes$/#Options -Indexes/g' ./.htaccess
 #-------Configure Apache to host our Bugzilla installation-----------
 cd $(cd `dirname $0`; pwd)
 cp /root/deploy-bugzilla/conf/bugzilla.conf  /etc/httpd/conf.d
-systemctl start httpd.service
+systemctl start httpd.service  1>/dev/null 2>&1
 systemctl enable httpd.service
 
 #----------------done ----------------------
