@@ -68,4 +68,4 @@ systemctl enable httpd.service 1>/dev/null 2>&1
 
 #----------------done ----------------------
 echo $GREEN Voila! You have now a working Bugzilla 5.0 installation on $(cat /etc/redhat-release). You can now continue to setup the details of Bugzilla within the Bugzilla web interface. $NO_COLOR
-echo "Use a browser and open http://ip-of-your-server/ (replace ip-of-your-server with the ip address of your server). You should now see the Bugzilla page "
+echo $GREEN Use a browser and open http://ip-of-your-server, You should now see the Bugzilla page $NO_COLOR
