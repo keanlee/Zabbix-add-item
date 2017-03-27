@@ -1,6 +1,18 @@
 #!/bin/sh
 #author by haoli on 13th Oct of 2016
 #wget -r -p -np -k -P ./ http://110.76.187.145/repos/
+# ansi colors for formatting heredoc
+ESC=$(printf "\e")
+GREEN="$ESC[0;32m"
+NO_COLOR="$ESC[0;0m"
+RED="$ESC[0;31m"
+MAGENTA="$ESC[0;35m"
+YELLOW="$ESC[0;33m"
+BLUE="$ESC[0;34m"
+WHITE="$ESC[0;37m"
+#PURPLE="$ESC[0;35m"
+CYAN="$ESC[0;36m"
+
 README=$(cat ./README.txt)
 OS=$(cat /etc/redhat-release | awk '{print $1}')
 if [ $OS = Red ];then
@@ -50,11 +62,11 @@ function choice(){
           install
           ;;
           2)
-          echo "This script will be deploy zabbix-server on $(cat /etc/redhat-release)"
+          echo "This script will be deploy zabbix-server on $GREEN $(cat /etc/redhat-release) $NO_CLOLOR"
           install
           ;;
           3)
-          echo "This script will be deploy zabbix-server on $(cat /etc/redhat-release)"
+          echo "This script will be deploy zabbix-server on $GREEN $(cat /etc/redhat-release) $NO_CLOLOR"
           install
           exit 0
           esac
