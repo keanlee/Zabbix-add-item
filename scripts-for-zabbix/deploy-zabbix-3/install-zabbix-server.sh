@@ -55,21 +55,15 @@ echo -e "\e[1;32m ----->PLEASE Login as Admin/zabbix in IP/zabbix by your Browse
 }
 
 function choice(){
-          case $1 in
-          1)
-          #--------------Downgrade the pacakge of systemc, since the higher version cause can't start zabbix-server daemon
-          rpm -Uvh --force ./pacakges/gnutls-3.1.18-8.el7.x86_64.rpm   1>/dev/null 2>&1 
-          install
-          ;;
-          2)
-          echo "This script will be deploy zabbix-server on $GREEN $(cat /etc/redhat-release) $NO_CLOLOR"
-          install
-          ;;
-          3)
-          echo "This script will be deploy zabbix-server on $GREEN $(cat /etc/redhat-release) $NO_CLOLOR"
-          install
-          exit 0
-          esac
+           if [ $1 -eq 1 ];then
+#--------------Downgrade the pacakge of systemc, since the higher version cause can't start zabbix-server daemon
+            rpm -Uvh --force ./pacakges/gnutls-3.1.18-8.el7.x86_64.rpm   1>/dev/null 2>&1
+            install
+            else
+            echo "This script will be deploy zabbix-server on $GREEN $(cat /etc/redhat-release) $NO_CLOLOR"
+            install
+            fi
+
 }
 
 if [ $(rpm -qa | grep zabbix | wc -l) -ge 1 ];then
