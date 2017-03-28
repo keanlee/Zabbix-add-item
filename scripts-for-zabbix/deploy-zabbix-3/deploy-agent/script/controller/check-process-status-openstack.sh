@@ -1,6 +1,8 @@
 #!/bin/bash 
 #author by keanli
-source  /root/openrc
+DIR=$(find / -name openrc )
+source $DIR
+
 case $1 in
 nova)
      process_status=$($1 service-list  | awk -F '|' '{print  $3 $4 $7}' | grep down | awk '{print $2": "$1}')
