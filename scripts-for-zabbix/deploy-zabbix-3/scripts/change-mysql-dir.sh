@@ -4,6 +4,7 @@ systemctl stop mariadb &&
 #format the disk 
 mkfs.ext4 /dev/vdb      #replace by your know partition  e.g. :vda vdb sdb etc  
 mount /dev/vdb /home
+sed -i '11 i /dev/vdb                /home                   ext4    defaults       0 0  '  /etc/fstab
 
 cp -R /var/lib/mysql/  /home/
 chown -R mysql:mysql /home/mysql
