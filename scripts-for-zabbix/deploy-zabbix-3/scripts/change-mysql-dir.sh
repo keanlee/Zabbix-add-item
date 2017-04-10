@@ -12,5 +12,6 @@ chown -R mysql:mysql /home/mysql
 sed -i 's/datadir=\/var\/lib\/mysql/datadir=\/home\/mysql/g' /etc/my.cnf
 sed -i 's/socket=\/var\/lib\/mysql\/mysql.sock/socket=\/home\/mysql\/mysql.sock/g' /etc/my.cnf
 systemctl start mariadb &&
+#rm -rf /var/lib/mysql/*
 ln -s /home/mysql/mysql.sock /var/lib/mysql/mysql.sock
 echo "change dir of mysql done "
