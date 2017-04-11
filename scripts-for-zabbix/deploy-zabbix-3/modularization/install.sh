@@ -48,7 +48,8 @@ cp ./scripts/Email.py /etc/zabbix/scripts
 cp ./scripts/Wechat.py /etc/zabbix/scripts 
 cp ./scripts/get-zabbix-database-size.sh /etc/zabbix/scripts 
 cp ./scripts/zabbix.conf.php /etc/zabbix/web  
-chown -R zabbix:zabbix /etc/zabbix/scripts 
+chown -R zabbix:zabbix /etc/zabbix/scripts
+chmod 700 /etc/zabbix/scripts/*
 echo -e "\e[1;36m ----->/etc/zabbix/zabbix_server.conf edited finished \e[0m"
 echo -e "\e[1;36m ----->Email.py and Wechat.py has been copy to /etc/zabbix/scripts \e[0m"
 #----------------Setup the timezone of zabbix server -------------
