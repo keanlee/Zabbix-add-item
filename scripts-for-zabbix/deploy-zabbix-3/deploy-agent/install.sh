@@ -26,6 +26,7 @@ sed -i "60 i -A INPUT -p tcp -m multiport --ports 10050 -m comment --comment \"z
 mkdir -p /etc/zabbix/scripts
 cp ./script/common/serviceexist.sh /etc/zabbix/scripts/
 chown -R zabbix:zabbix /etc/zabbix/scripts
+chmod 700 /etc/zabbix/scripts/*
 
 sed -i '294 i  UserParameter=openstack.serviceexist[*],/etc/zabbix/scripts/serviceexist.sh $1 ' /etc/zabbix/zabbix_agentd.conf
 
