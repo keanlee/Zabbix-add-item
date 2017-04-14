@@ -21,7 +21,20 @@ sed -i "s/Server=127.0.0.1/Server=$ZABBIXSERVER/g" /etc/zabbix/zabbix_agentd.con
 sed -i "s/ServerActive=127.0.0.1/ServerActive=$ZABBIXSERVER/g"  /etc/zabbix/zabbix_agentd.conf
 sed -i "s/Hostname=Zabbix\ server/Hostname=$HOSTNAME/g"  /etc/zabbix/zabbix_agentd.conf
 sed -i "167 i HostMetadata=$METADATA"  /etc/zabbix/zabbix_agentd.conf
-sed -i "60 i -A INPUT -p tcp -m multiport --ports 10050 -m comment --comment \"zabbix agent \" -j ACCEPT " /etc/sysconfig/iptables 1>/dev/null 2>&1 
+
+#--------------iptables setip------
+STATUS=$(systemctl status firewalld | grep Active | awk -F ":" '{print $2}' | awk '{print $1}')
+if [[ $STATUS = active ]];then
+firewall-cmd --zone=public --add-port=10050/tcp --permanent 1>/dev/null 2>&1
+firewall-cmd --reload  1>/dev/null 2>&1
+elif [ -f /etc/sysconfig/ ];then
+iptables -A  INPUT -p tcp --dport 10050 -j ACCEPT
+iptables-save > /etc/sysconfig/iptables
+else
+echo "No iptables rule "
+continue
+fi
+
 #--------------add item by manual------------------- 
 mkdir -p /etc/zabbix/scripts
 cp ./script/common/serviceexist.sh /etc/zabbix/scripts/
