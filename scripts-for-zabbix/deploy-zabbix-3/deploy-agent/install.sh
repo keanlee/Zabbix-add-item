@@ -38,9 +38,6 @@ fi
 #--------------add item by manual------------------- 
 mkdir -p /etc/zabbix/scripts
 cp ./script/common/serviceexist.sh /etc/zabbix/scripts/
-chown -R zabbix:zabbix /etc/zabbix/scripts
-
-
 sed -i '294 i  UserParameter=openstack.serviceexist[*],/etc/zabbix/scripts/serviceexist.sh $1 ' /etc/zabbix/zabbix_agentd.conf
 
 #--------------For openstack controller item ---------
@@ -50,7 +47,9 @@ sed -i '295 i UserParameter=check-process-status-openstack[*],/etc/zabbix/script
 else 
 continue 
 fi 
+chown -R zabbix:zabbix /etc/zabbix/scripts
 chmod 700 /etc/zabbix/scripts/*
+
 #--------------add ceph support -------------------------
 if [ $METADATA = ceph ];then
 usermod -a -G ceph zabbix
