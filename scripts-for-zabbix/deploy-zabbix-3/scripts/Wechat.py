@@ -10,7 +10,7 @@ reload(sys)
 
 
 class WeChat(object):
-        """Modified by Xiaoming Zheng for zabbix 2.4.8 where the subject and content are combined as the MSG\n First parameter is WechatID, the second one is subject as Email, the third/last one is MSG content!"""
+        """ where the subject and content are combined as the MSG\n First parameter is WechatID, the second one is subject as Email, the third/last one is MSG content!"""
         __token_id = ''
         # init attribute
         def __init__(self,url):
