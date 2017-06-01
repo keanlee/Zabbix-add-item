@@ -7,6 +7,7 @@ GREEN="$ESC[0;32m"
 NO_COLOR="$ESC[0;0m"
 RED="$ESC[0;31m"
 
+#more info ,you can refer https://www.howtoforge.com/tutorial/install-bugzilla-50-on-centos-7/
 #--------config yum repo on this server----------
 rm -rf /etc/yum.repos.d/*
 cp ./repo/*  /etc/yum.repos.d/
