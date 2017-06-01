@@ -12,6 +12,10 @@ rm -rf /etc/yum.repos.d/*
 cp ./repo/*  /etc/yum.repos.d/
 echo $GREEN setup zabbix repos successfull $NO_COLOR
 
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config #disable selinux in conf file 
+setenforce 0  &&
+echo -e "\e[1;36m ----->The Selinux Status: $( getenforce) \e[0m"
+
 #-----------install dependence for install bugzilla-----------------------------------
 #DO NOT INSTALL the package perl-homedir, because this would break the Bugzilla installation.
 #('perl-homedir' would install perl modules in user folders which won't be accessible by Bugzilla so absolutely do not install it!)
